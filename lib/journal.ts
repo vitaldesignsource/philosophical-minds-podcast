@@ -1,3 +1,4 @@
+import { familiarWorldContent } from "@/lib/familiarWorldArticle";
 import { whatIsTheurgyContent } from "@/lib/whatIsTheurgyArticle";
 
 export type JournalArticle = {
@@ -48,11 +49,17 @@ const journalArticleDrafts: JournalArticle[] = [
   }
 ];
 
-export const journalArticles: JournalArticle[] = journalArticleDrafts.map((article) =>
-  article.slug === "what-is-theurgy"
-    ? { ...article, content: whatIsTheurgyContent, readTime: "9 min read" }
-    : article,
-);
+export const journalArticles: JournalArticle[] = journalArticleDrafts.map((article) => {
+  if (article.slug === "what-is-theurgy") {
+    return { ...article, content: whatIsTheurgyContent, readTime: "9 min read" };
+  }
+
+  if (article.slug === "familiar-world-made-strange") {
+    return { ...article, content: familiarWorldContent, readTime: "11 min read" };
+  }
+
+  return article;
+});
 
 export function getJournalArticle(slug: string): JournalArticle | undefined {
   return journalArticles.find((article) => article.slug === slug);
