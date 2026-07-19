@@ -1,5 +1,6 @@
 import { XMLParser } from "fast-xml-parser";
 import sanitizeHtml from "sanitize-html";
+import { podcastFeedSnapshot } from "./rssSnapshot";
 
 export type PodcastEpisode = {
   id: string;
@@ -33,7 +34,7 @@ export type PodcastFeed = {
 
 const PRIMARY_RSS_URL = "https://philosophicalmindspodcast.com/rss";
 const DIRECT_LIBSYN_RSS_URL = "https://rss.libsyn.com/shows/126739/destinations/758595.xml";
-const LIBSYN_REDIRECT_RSS_URL = "https://philosophicalminds.libsyn.com/rss";
+const LIVE_RSS_TIMEOUT_MS = 4_000;
 
 const parser = new XMLParser({
   attributeNamePrefix: "@_",
@@ -75,7 +76,7 @@ const sanitizeOptions: sanitizeHtml.IOptions = {
 };
 
 export async function getPodcastFeed(limit?: number): Promise<PodcastFeed> {
-  const urls = [DIRECT_LIBSYN_RSS_URL, LIBSYN_REDIRECT_RSS_URL, PRIMARY_RSS_URL];
+  const urls = [DIRECT_LIBSYN_RSS_URL];
   const errors: string[] = [];
 
   for (const url of urls) {
@@ -91,12 +92,12 @@ export async function getPodcastFeed(limit?: number): Promise<PodcastFeed> {
   }
 
   return {
-    title: "Philosophical Minds",
-    description:
-      "Long-form conversations exploring philosophy, metaphysics, consciousness, religion, alchemy, hidden history, and the architecture of human thought.",
-    artwork: "/philosophical-minds-hero.png",
+    ...podcastFeedSnapshot,
     sourceUrl: PRIMARY_RSS_URL,
-    episodes: [],
+    episodes:
+      typeof limit === "number"
+        ? podcastFeedSnapshot.episodes.slice(0, limit)
+        : podcastFeedSnapshot.episodes,
     error: errors.join(" | "),
   };
 }
@@ -110,6 +111,7 @@ async function fetchAndParseFeed(url: string): Promise<PodcastFeed> {
     },
     next: { revalidate: 60 * 30 },
     redirect: "follow",
+    signal: AbortSignal.timeout(LIVE_RSS_TIMEOUT_MS),
   });
 
   if (!response.ok) {
