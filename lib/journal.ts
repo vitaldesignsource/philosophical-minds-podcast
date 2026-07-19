@@ -1,3 +1,4 @@
+import { alchemyLanguageContent } from "@/lib/alchemyLanguageArticle";
 import { familiarWorldContent } from "@/lib/familiarWorldArticle";
 import { whatIsTheurgyContent } from "@/lib/whatIsTheurgyArticle";
 
@@ -56,6 +57,15 @@ export const journalArticles: JournalArticle[] = journalArticleDrafts.map((artic
 
   if (article.slug === "familiar-world-made-strange") {
     return { ...article, content: familiarWorldContent, readTime: "11 min read" };
+  }
+
+  if (article.slug === "alchemy-language-of-change") {
+    return {
+      ...article,
+      subtitle: "The Universal Grammar of Becoming",
+      content: alchemyLanguageContent,
+      readTime: "10 min read",
+    };
   }
 
   return article;
