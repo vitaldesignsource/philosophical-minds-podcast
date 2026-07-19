@@ -1,5 +1,6 @@
 import { GlobalPlayer } from "@/components/GlobalPlayer";
 import { SiteFooter } from "@/components/SiteFooter";
+import { getPodcastFeed } from "@/lib/rss";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -38,17 +39,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const feed = await getPodcastFeed(1);
+
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         {children}
         <SiteFooter />
-        <GlobalPlayer />
+        <GlobalPlayer initialEpisode={feed.episodes[0]} />
       </body>
     </html>
   );

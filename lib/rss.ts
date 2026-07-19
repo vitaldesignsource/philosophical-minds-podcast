@@ -32,7 +32,8 @@ export type PodcastFeed = {
 };
 
 const PRIMARY_RSS_URL = "https://philosophicalmindspodcast.com/rss";
-const FALLBACK_RSS_URL = "https://philosophicalminds.libsyn.com/rss";
+const DIRECT_LIBSYN_RSS_URL = "https://rss.libsyn.com/shows/126739/destinations/758595.xml";
+const LIBSYN_REDIRECT_RSS_URL = "https://philosophicalminds.libsyn.com/rss";
 
 const parser = new XMLParser({
   attributeNamePrefix: "@_",
@@ -74,7 +75,7 @@ const sanitizeOptions: sanitizeHtml.IOptions = {
 };
 
 export async function getPodcastFeed(limit?: number): Promise<PodcastFeed> {
-  const urls = [PRIMARY_RSS_URL, FALLBACK_RSS_URL];
+  const urls = [DIRECT_LIBSYN_RSS_URL, LIBSYN_REDIRECT_RSS_URL, PRIMARY_RSS_URL];
   const errors: string[] = [];
 
   for (const url of urls) {
@@ -108,6 +109,7 @@ async function fetchAndParseFeed(url: string): Promise<PodcastFeed> {
       "user-agent": "PhilosophicalMindsWebsite/1.0 (+https://philosophicalmindspodcast.com)",
     },
     next: { revalidate: 60 * 30 },
+    redirect: "follow",
   });
 
   if (!response.ok) {

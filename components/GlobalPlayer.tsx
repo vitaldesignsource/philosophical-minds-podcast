@@ -25,10 +25,14 @@ const WAVE_TEXT = [
   "ΕΠΙΣΤΡΟΦΗ",
 ];
 
-export function GlobalPlayer() {
+type Props = {
+  initialEpisode?: PodcastEpisode;
+};
+
+export function GlobalPlayer({ initialEpisode }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const waveformRef = useRef<HTMLCanvasElement>(null);
-  const [episode, setEpisode] = useState<PodcastEpisode | null>(null);
+  const [episode, setEpisode] = useState<PodcastEpisode | null>(initialEpisode ?? null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -40,7 +44,8 @@ export function GlobalPlayer() {
     const saved = window.localStorage.getItem(STORAGE_KEY);
     if (saved) {
       try {
-        setEpisode(JSON.parse(saved));
+        const savedEpisode = JSON.parse(saved) as PodcastEpisode;
+        if (savedEpisode?.audioUrl) setEpisode(savedEpisode);
       } catch {
         window.localStorage.removeItem(STORAGE_KEY);
       }
