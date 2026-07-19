@@ -217,7 +217,7 @@ main {
   display: none;
 }
 
-.site-nav div {
+.site-nav__links {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
@@ -225,7 +225,7 @@ main {
   justify-content: flex-end;
 }
 
-.site-nav div a {
+.site-nav__links a {
   border: 1px solid transparent;
   color: var(--muted);
   font-family: "Cinzel", Georgia, serif;
@@ -235,9 +235,13 @@ main {
   text-transform: uppercase;
 }
 
-.site-nav div a:hover {
+.site-nav__links a:hover {
   border-color: var(--line);
   color: var(--ivory);
+}
+
+.site-nav__toggle {
+  display: none;
 }
 
 .hero__actions,
@@ -2364,37 +2368,146 @@ select option {
   }
 
   .site-nav {
-    align-items: start;
-    display: grid;
-    min-height: 0;
-    padding: 9rem 0.8rem 0.8rem;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    min-height: 7.5rem;
+    padding: 0.65rem;
   }
 
   .site-nav .brand-mark {
-    height: 7rem;
-    left: 0.35rem;
-    top: -0.65rem;
-    transform: none;
-    width: min(12.5rem, 68vw);
+    height: 6.45rem;
+    left: 50%;
+    top: 0.5rem;
+    transform: translateX(-50%);
+    width: min(10.5rem, 46vw);
   }
 
   .site-nav .brand-mark:hover {
-    transform: scale(1.025);
+    transform: translateX(-50%) scale(1.025);
   }
 
-  .site-nav div {
-    justify-content: start;
+  .site-nav__toggle {
+    align-items: center;
+    background: rgba(9, 8, 8, 0.78);
+    border: 1px solid rgba(210, 170, 111, 0.42);
+    color: var(--ivory);
+    cursor: pointer;
+    display: inline-flex;
+    height: 2.85rem;
+    justify-content: center;
+    padding: 0;
     position: relative;
-    z-index: 4;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease;
+    width: 2.85rem;
+    z-index: 7;
+  }
+
+  .site-nav__toggle:hover,
+  .site-nav__toggle:focus-visible {
+    background: rgba(210, 170, 111, 0.14);
+    border-color: rgba(232, 193, 128, 0.78);
+    outline: none;
+  }
+
+  .site-nav__toggle-icon {
+    display: grid;
+    gap: 0.25rem;
+    width: 1.15rem;
+  }
+
+  .site-nav__toggle-icon i {
+    background: #ead7b3;
+    display: block;
+    height: 1px;
+    transform-origin: center;
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+    width: 100%;
+  }
+
+  .site-nav__toggle--open .site-nav__toggle-icon i:first-child {
+    transform: translateY(0.3125rem) rotate(45deg);
+  }
+
+  .site-nav__toggle--open .site-nav__toggle-icon i:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-nav__toggle--open .site-nav__toggle-icon i:last-child {
+    transform: translateY(-0.3125rem) rotate(-45deg);
+  }
+
+  .site-nav__links {
+    align-items: stretch;
+    background:
+      linear-gradient(135deg, rgba(24, 20, 18, 0.98), rgba(5, 5, 5, 0.99)),
+      #080706;
+    border: 1px solid rgba(210, 170, 111, 0.36);
+    box-shadow:
+      0 22px 48px rgba(0, 0, 0, 0.72),
+      0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    left: 0;
+    max-height: calc(100vh - 9rem);
+    opacity: 0;
+    overflow: auto;
+    padding: 0.55rem;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.45rem);
+    transform: translateY(-0.55rem);
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease,
+      visibility 180ms ease;
+    visibility: hidden;
+    z-index: 8;
+  }
+
+  .site-nav__links--open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .site-nav__links a {
+    align-items: center;
+    border-bottom: 1px solid rgba(210, 170, 111, 0.13);
+    color: #d8c9ae;
+    display: flex;
+    font-size: 0.72rem;
+    justify-content: center;
+    min-height: 3.2rem;
+    padding: 0.65rem 0.5rem;
+    text-align: center;
+  }
+
+  .site-nav__links a:hover,
+  .site-nav__links a:focus-visible {
+    background: rgba(210, 170, 111, 0.09);
+    border-color: rgba(210, 170, 111, 0.35);
+    color: #fff2dc;
+    outline: none;
   }
 
   .hero__content {
-    padding-top: 7rem;
+    padding-top: 4.75rem;
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 15vw, 4.8rem);
-    overflow-wrap: break-word;
+    font-size: 2.65rem;
+    line-height: 1.08;
+    max-width: none;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 
   .latest-card,
@@ -2587,6 +2700,14 @@ select option {
 }
 
 @media (max-width: 520px) {
+  .site-nav__links {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 2.05rem;
+  }
+
   section:not(.hero),
   .page-hero {
     padding-left: 0.85rem;
@@ -2613,6 +2734,12 @@ select option {
 
   .episode-playlist .play-button {
     width: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 1.82rem;
   }
 }
 
