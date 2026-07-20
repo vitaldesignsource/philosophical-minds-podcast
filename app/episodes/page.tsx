@@ -17,10 +17,7 @@ export default async function EpisodesPage() {
         <SiteHeader />
         <p className="eyebrow">Scholarly media catalog</p>
         <h1>Episode Archive</h1>
-        <p>
-          Search the living record of conversations by keyword, topic, year, and publication order. Every playable episode
-          can be sent into the persistent player.
-        </p>
+        <p>Search the living record of conversations by keyword, topic, year, and publication order.</p>
       </section>
       <section className="archive-section">
         <EpisodeExplorer episodes={feed.episodes} />

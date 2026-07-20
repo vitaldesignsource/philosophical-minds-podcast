@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "The Minds",
-  description: "A future guest encyclopedia for Philosophical Minds contributors.",
+  description: "A guest encyclopedia for Philosophical Minds contributors.",
 };
 
 export default function GuestsPage() {
@@ -27,10 +27,7 @@ export default function GuestsPage() {
         <div className="section-heading">
           <p className="eyebrow">Living Index</p>
           <h2>{guests.length} Names in the Archive</h2>
-          <p>
-            An evolving directory drawn from the podcast archive, with biographical entries appearing as each profile
-            is completed.
-          </p>
+          <p>An evolving directory drawn from the podcast archive.</p>
         </div>
 
         <div className="guest-index">

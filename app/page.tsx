@@ -108,11 +108,8 @@ export default async function Home() {
             </article>
           ) : (
             <div className="empty-state">
-              <h3>RSS temporarily unavailable</h3>
-              <p>
-                The site is ready to display the newest feed item as soon as the endpoint responds. The full embedded
-                playlist below remains available for listening.
-              </p>
+              <h3>The newest conversation is temporarily unavailable.</h3>
+              <p>Explore the complete playlist below in the meantime.</p>
             </div>
           )}
         </section>
@@ -137,10 +134,6 @@ export default async function Home() {
           <div className="section-heading">
             <p className="eyebrow">Searchable media catalog</p>
             <h2>Featured Conversations</h2>
-            <p>
-              Filter by topic, year, and keyword. Play controls send episodes into the persistent player without forcing
-              visitors away from the archive.
-            </p>
           </div>
           <EpisodeExplorer episodes={featured.length > 0 ? featured : feed.episodes} compact />
           <div className="center-row">
@@ -172,17 +165,13 @@ export default async function Home() {
 
         <section className="quote-section">
           <blockquote>Philosophy begins when the familiar world becomes mysterious again.</blockquote>
-          <p>Editable featured quote prepared for the owner dashboard.</p>
         </section>
 
         <section className="playlist-section" id="playlist">
           <div className="section-heading">
             <p className="eyebrow">All episodes playable</p>
             <h2>Complete Podcast Playlist</h2>
-            <p>
-              Every available conversation from the public feed, arranged in a single listening manuscript. Choose an
-              episode below to send it directly into the persistent scroll player.
-            </p>
+            <p>Every available conversation gathered into a single listening archive.</p>
           </div>
           <CompletePlaylist episodes={feed.episodes} />
         </section>

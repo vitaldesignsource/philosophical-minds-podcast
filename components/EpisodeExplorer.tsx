@@ -151,11 +151,8 @@ export function EpisodeExplorer({ episodes, compact = false }: Props) {
         </div>
       ) : (
         <div className="empty-state">
-          <h3>The archive is waiting for the feed.</h3>
-          <p>
-            The site keeps the catalog interface ready while the RSS endpoint is unavailable. The Libsyn playlist below remains available
-            for listening.
-          </p>
+          <h3>The episode archive is temporarily unavailable.</h3>
+          <p>The complete playlist below remains available for listening.</p>
         </div>
       )}
     </section>

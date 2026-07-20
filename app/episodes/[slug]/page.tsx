@@ -96,7 +96,6 @@ export default async function EpisodePage({ params }: Props) {
           {related.length === 0 && (
             <div className="empty-state">
               <h3>Related episodes will grow with the archive.</h3>
-              <p>Matching is based on overlapping RSS topic categories and can later expand to transcripts and guests.</p>
             </div>
           )}
         </div>

@@ -56,10 +56,6 @@ export default async function TopicSignalsPage({ params }: Props) {
         <div className="section-heading">
           <p className="eyebrow">{relatedEpisodes.length} related signals</p>
           <h2>Conversations Connected to {topic.title}</h2>
-          <p>
-            These results are gathered from episode titles, descriptions, and RSS topic categories. As transcripts and
-            library entries are added, this page can become a deeper research workbench for the topic.
-          </p>
         </div>
         <EpisodeExplorer episodes={relatedEpisodes} />
       </section>
