@@ -2,7 +2,25 @@ import { GlobalPlayer } from "@/components/GlobalPlayer";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getPodcastFeed } from "@/lib/rss";
 import type { Metadata } from "next";
+import { Cinzel, Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  variable: "--font-cinzel",
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -48,7 +66,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>
+      <body className={`${inter.variable} ${cinzel.variable} ${cormorant.variable}`}>
         {children}
         <SiteFooter />
         <GlobalPlayer initialEpisode={feed.episodes[0]} />
