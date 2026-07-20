@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main>
+    <main className="about-page">
       <section className="page-hero">
         <SiteHeader />
         <p className="eyebrow">The Love of Wisdom</p>
