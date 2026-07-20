@@ -76,10 +76,6 @@ export default async function Home() {
           <div className="section-heading">
             <p className="eyebrow">Latest from the archive</p>
             <h2>Newest Conversation</h2>
-            <p>
-              The public feed is read server-side, sanitized before rendering, and cached so the archive remains fast and
-              composed even when a feed endpoint is temporarily unreachable.
-            </p>
           </div>
 
           {latest ? (

@@ -1990,6 +1990,41 @@ section:not(.hero) {
   border-left: 1px solid rgba(210, 170, 111, 0.24);
 }
 
+.about-host__profile {
+  align-items: start;
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.3fr);
+}
+
+.about-host__portrait {
+  margin: 0;
+  max-width: 430px;
+  position: relative;
+}
+
+.about-host__portrait::after {
+  border: 1px solid rgba(236, 210, 165, 0.3);
+  content: "";
+  inset: 0.7rem;
+  pointer-events: none;
+  position: absolute;
+}
+
+.about-host__portrait img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.about-host__portrait figcaption {
+  color: #a99576;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.68rem;
+  padding-top: 0.75rem;
+  text-transform: uppercase;
+}
+
 .about-host__prose {
   max-width: 840px;
 }
@@ -2019,6 +2054,16 @@ section:not(.hero) {
 
 .about-host__links {
   margin-top: 2.4rem;
+}
+
+@media (max-width: 860px) {
+  .about-host__profile {
+    grid-template-columns: 1fr;
+  }
+
+  .about-host__portrait {
+    max-width: 560px;
+  }
 }
 
 @media (max-width: 640px) {
