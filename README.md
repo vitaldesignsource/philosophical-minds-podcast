@@ -1,98 +1,96 @@
-# vinext-starter
+# Philosophical Minds Podcast
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+The website for the Philosophical Minds Podcast: episodes, guest profiles, a
+topic map, a journal, and a reference library of philosophical and esoteric
+traditions.
 
-## Prerequisites
+Built with Next.js 16 and React 19. Episode data comes from the podcast's RSS
+feed at request time, with a bundled snapshot as a fallback.
 
-- Node.js `>=22.13.0`
+## Running locally
 
-## Quick Start
+Requires Node.js 22.13.0 or newer.
 
 ```bash
-npm install
-npm run dev
-npm run build
+pnpm install
+pnpm run dev     # http://localhost:3000
 ```
 
-This starter does not use `wrangler.jsonc`.
+Other commands:
 
-## Included Shape
+| Command | What it does |
+| --- | --- |
+| `pnpm run build` | Production build |
+| `pnpm run start` | Serve the production build |
+| `pnpm run lint` | ESLint |
+| `pnpm test` | Build, then smoke-test the running server |
+| `pnpm run test:smoke` | Smoke test only, against an existing build |
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+## Deployment
 
-## Workspace Auth Headers
+The site is hosted on Hostinger and **deploys automatically on every push to
+`main`**. There is no manual upload step. Hostinger clones the repository,
+runs `pnpm run build`, and serves `.next` from a per-deploy directory.
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
+Because a push goes straight to production, `.github/workflows/ci.yml` runs
+lint, build, and the smoke test on every push and pull request.
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
+### Two settings that production depends on
 
-Treat the full name as optional and fall back to email when it is absent:
+Both of these were the cause of a full site outage. Please don't remove either
+without testing a real deployment.
 
-```tsx
-import { headers } from "next/headers";
+**1. `"build": "next build --webpack"` in `package.json`**
 
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
+Next 16 builds with Turbopack by default. The server code Turbopack emits
+resolves its runtime through `externalRequire` at request time, which fails on
+Hostinger because each deploy runs from a fresh versioned directory. The build
+succeeds and the process starts, then every request fails with:
 
-  const displayName = fullName ?? email;
-  // ...
-}
+```
+Failed to load external module next/dist/compiled/next-server/app-page-turbo.runtime.prod.js
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+**2. `nodeLinker: hoisted` in `pnpm-workspace.yaml`**
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+pnpm's default layout keeps transitive dependencies inside `node_modules/.pnpm`
+and links only direct dependencies at the top level. Next's compiled server
+code requires `@swc/helpers` from the application root, which only resolves
+under a flat, npm-style layout. Without this setting production fails with:
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+```
+Cannot find module '@swc/helpers/_/_interop_require_default'
+```
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+This setting lives in `pnpm-workspace.yaml` rather than `.npmrc` because pnpm
+10+ reads its configuration from the workspace file when one is present, and
+silently ignores `.npmrc`.
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+Both failures happen at runtime, after a successful build, which is why the
+smoke test starts the server and makes real requests instead of only building.
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+## Layout
 
-## Useful Commands
+```
+app/              routes (App Router)
+  library/        the Library index and its [slug] shelf pages
+components/       shared UI, including the site header and global player
+lib/              content and data
+  shelves.ts      the Library's shelf registry
+  library.ts      the Shelf type every shelf conforms to
+  hermeticism.ts  the Hermeticism shelf
+  guests.ts       guest profiles
+  journal.ts      journal articles
+  rss.ts          podcast feed, with rssSnapshot.ts as fallback
+  topics.ts       the topic map
+tests/            smoke test against the built server
+```
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+### Adding a Library shelf
 
-## Learn More
+1. Write `lib/<tradition>.ts` exporting a `Shelf` (see `lib/hermeticism.ts`).
+2. Add it to `shelves` in `lib/shelves.ts` and remove the matching entry from
+   `plannedShelves`.
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+The index card, the `/library/<slug>` page, the sitemap entry, and the metadata
+all follow from that.

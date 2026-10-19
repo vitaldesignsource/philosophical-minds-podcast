@@ -1,0 +1,45 @@
+# This repository deploys to production on every push to main, so a broken
+# build or a server that cannot start reaches visitors directly. The smoke
+# test starts the built server and makes real requests, because both outages
+# this site has had were runtime module-resolution failures that `next build`
+# reported as successful.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      # Pinned to the major your host runs, so CI exercises production's runtime.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Smoke test the running server
+        run: pnpm run test:smoke

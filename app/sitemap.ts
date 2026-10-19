@@ -1,4 +1,6 @@
 import { journalArticles } from "@/lib/journal";
+import { shelves } from "@/lib/shelves";
+import { coreTopics, topicSlug } from "@/lib/topics";
 import { guestProfiles } from "@/lib/guests";
 import { getPodcastFeed } from "@/lib/rss";
 import type { MetadataRoute } from "next";
@@ -38,5 +40,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
   }));
 
-  return [...staticRoutes, ...episodeRoutes, ...journalRoutes, ...guestRoutes];
+  const topicRoutes = coreTopics.map((topic) => ({
+    url: `${baseUrl}/topics/${topicSlug(topic.title)}`,
+    lastModified: new Date(),
+  }));
+
+  const shelfRoutes = shelves.map((shelf) => ({
+    url: `${baseUrl}/library/${shelf.slug}`,
+    lastModified: new Date(),
+  }));
+
+  return [
+    ...staticRoutes,
+    ...episodeRoutes,
+    ...journalRoutes,
+    ...guestRoutes,
+    ...topicRoutes,
+    ...shelfRoutes,
+  ];
 }

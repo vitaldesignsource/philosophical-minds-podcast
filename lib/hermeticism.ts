@@ -1,43 +1,13 @@
-export type HermeticFact = {
-  label: string;
-  value: string;
-};
-
-export type HermeticText = {
-  title: string;
-  meta: string;
-  description: string;
-};
-
-export type HermeticPrinciple = {
-  term: string;
-  title: string;
-  description: string;
-};
-
-export type HermeticEra = {
-  period: string;
-  title: string;
-  description: string;
-};
-
-export type ReadingEntry = {
-  stage: string;
-  title: string;
-  author: string;
-  note: string;
-};
-
-export type GlossaryEntry = {
-  term: string;
-  gloss: string;
-};
-
-export type RelatedLink = {
-  href: string;
-  label: string;
-  kind: string;
-};
+import type {
+  Shelf,
+  ShelfEra,
+  ShelfFact,
+  ShelfGlossaryEntry,
+  ShelfLink,
+  ShelfPrinciple,
+  ShelfReading,
+  ShelfText,
+} from "./library";
 
 export const hermeticismSummary =
   "The Greco-Egyptian literature attributed to Hermes Trismegistus, its central doctrines, its long transmission into the Renaissance, and where a serious reader should begin.";
@@ -49,7 +19,7 @@ export const hermeticismOverview: string[] = [
   "What gives Hermeticism its outsized importance is not only what it says but what happened to it. Carried through Arabic and Byzantine hands, recovered in Florence in the fifteenth century, and mistakenly believed to be older than Moses, it became the philosophical charter for two centuries of Renaissance magic, natural philosophy, and religious reform. Almost every subsequent Western esoteric current runs through it.",
 ];
 
-export const hermeticismFacts: HermeticFact[] = [
+export const hermeticismFacts: ShelfFact[] = [
   { label: "Origin", value: "Roman Egypt, chiefly Alexandria" },
   { label: "Period", value: "c. 100–300 CE" },
   { label: "Languages", value: "Greek, with Latin, Coptic, Armenian and Arabic survivals" },
@@ -57,7 +27,7 @@ export const hermeticismFacts: HermeticFact[] = [
   { label: "Philosophical setting", value: "Middle Platonism, Stoicism, Egyptian temple learning" },
 ];
 
-export const hermeticTexts: HermeticText[] = [
+export const hermeticTexts: ShelfText[] = [
   {
     title: "Corpus Hermeticum",
     meta: "Greek · seventeen treatises",
@@ -105,7 +75,7 @@ export const hermeticTexts: HermeticText[] = [
 export const kybalionNote =
   "The Kybalion, published in Chicago in 1908 under the name of Three Initiates and generally attributed to William Walker Atkinson, is not an ancient Hermetic text. Its seven principles appear nowhere in the Corpus Hermeticum. It is a genuinely interesting document of American New Thought, and it has introduced a great many readers to the word Hermeticism, but it should be read as a modern work about the tradition rather than as a source within it.";
 
-export const hermeticPrinciples: HermeticPrinciple[] = [
+export const hermeticPrinciples: ShelfPrinciple[] = [
   {
     term: "Nous",
     title: "Mind Before Matter",
@@ -156,7 +126,7 @@ export const hermeticPrinciples: HermeticPrinciple[] = [
   },
 ];
 
-export const hermeticEras: HermeticEra[] = [
+export const hermeticEras: ShelfEra[] = [
   {
     period: "1st–3rd c. CE",
     title: "Alexandria",
@@ -213,7 +183,7 @@ export const hermeticEras: HermeticEra[] = [
   },
 ];
 
-export const hermeticReading: ReadingEntry[] = [
+export const hermeticReading: ShelfReading[] = [
   {
     stage: "Begin here",
     title: "Hermetica",
@@ -264,7 +234,7 @@ export const hermeticReading: ReadingEntry[] = [
   },
 ];
 
-export const hermeticGlossary: GlossaryEntry[] = [
+export const hermeticGlossary: ShelfGlossaryEntry[] = [
   { term: "Nous", gloss: "Mind or Intellect; both the divine source and the highest faculty in the human being." },
   { term: "Logos", gloss: "Word, reason, articulation; the ordering utterance by which Mind gives the cosmos its form." },
   { term: "Gnosis", gloss: "Knowledge in the sense of direct acquaintance, which changes the knower rather than informing him." },
@@ -277,7 +247,7 @@ export const hermeticGlossary: GlossaryEntry[] = [
   { term: "Prisca theologia", gloss: "The ancient theology; the Renaissance conviction that a single primordial revelation was handed down through Hermes, Orpheus, Pythagoras, and Plato." },
 ];
 
-export const hermeticRelated: RelatedLink[] = [
+export const hermeticRelated: ShelfLink[] = [
   { href: "/topics/alchemy", label: "Alchemy", kind: "Topic" },
   { href: "/topics/theurgy-and-ritual", label: "Theurgy and Ritual", kind: "Topic" },
   { href: "/topics/esoteric-christianity", label: "Esoteric Christianity", kind: "Topic" },
@@ -285,3 +255,21 @@ export const hermeticRelated: RelatedLink[] = [
   { href: "/journal/what-is-theurgy", label: "What Is Theurgy?", kind: "Journal" },
   { href: "/journal/alchemy-language-of-change", label: "Alchemy, the Language of Change", kind: "Journal" },
 ];
+
+export const hermeticismShelf: Shelf = {
+  slug: "hermeticism",
+  number: "01",
+  title: "Hermeticism",
+  eyebrow: "Thrice-Greatest",
+  cardDescription: "Texts, principles, correspondences, and related conversations.",
+  summary: hermeticismSummary,
+  facts: hermeticismFacts,
+  overview: hermeticismOverview,
+  texts: { heading: { eyebrow: "Primary Sources", title: "The Core Texts" }, entries: hermeticTexts },
+  caution: { eyebrow: "A Necessary Caution", body: kybalionNote },
+  principles: { heading: { eyebrow: "Doctrine", title: "Central Ideas" }, entries: hermeticPrinciples },
+  eras: { heading: { eyebrow: "Transmission", title: "The Long Descent" }, entries: hermeticEras },
+  reading: { heading: { eyebrow: "Where to Start", title: "A Reading Path" }, entries: hermeticReading },
+  glossary: { heading: { eyebrow: "Vocabulary", title: "Terms of the Tradition" }, entries: hermeticGlossary },
+  related: hermeticRelated,
+};
