@@ -80,7 +80,7 @@ export default async function Home() {
 
           {latest ? (
             <article className="latest-card">
-              <div className="latest-card__art" style={{ backgroundImage: `url(${latest.artwork || feed.artwork || "/philosophical-minds-hero.png"})` }} />
+              <div className="latest-card__art" style={{ backgroundImage: `url(${latest.artwork || feed.artwork || "/philosophical-minds-hero.webp"})` }} />
               <div className="latest-card__body">
                 <div className="meta-line">
                   <span>{latest.displayDate}</span>

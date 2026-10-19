@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: episode.title,
       description: episode.excerpt,
-      images: episode.artwork ? [episode.artwork] : ["/og.png"],
+      images: episode.artwork ? [episode.artwork] : ["/og.jpg"],
       type: "article",
     },
   };
@@ -61,7 +61,7 @@ export default async function EpisodePage({ params }: Props) {
 
       <section className="route-section">
         <article className="latest-card">
-          <div className="latest-card__art" style={{ backgroundImage: `url(${episode.artwork || "/philosophical-minds-hero.png"})` }} />
+          <div className="latest-card__art" style={{ backgroundImage: `url(${episode.artwork || "/philosophical-minds-hero.webp"})` }} />
           <div className="latest-card__body">
             <div className="meta-line">
               {episode.episodeNumber && <span>Episode {episode.episodeNumber}</span>}

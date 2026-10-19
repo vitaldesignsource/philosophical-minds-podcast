@@ -140,7 +140,7 @@ async function fetchAndParseFeed(url: string): Promise<PodcastFeed> {
     description:
       toPlainText(firstText(channel.description) || firstText(channel["itunes:summary"])) ||
       "A living archive of philosophical conversations.",
-    artwork: channelArtwork || "/philosophical-minds-hero.png",
+    artwork: channelArtwork || "/philosophical-minds-hero.webp",
     sourceUrl: url,
     lastBuildDate: firstText(channel.lastBuildDate) || firstText(channel.pubDate),
     episodes,
@@ -183,7 +183,7 @@ function normalizeEpisode(
     seasonNumber,
     author,
     guest,
-    artwork: artwork || "/philosophical-minds-hero.png",
+    artwork: artwork || "/philosophical-minds-hero.webp",
     categories,
     explicit: firstText(item["itunes:explicit"]),
     sourceUrl: firstText(item.link),

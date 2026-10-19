@@ -274,7 +274,7 @@ export function GlobalPlayer({ initialEpisode }: Props) {
           className={`global-player ${isPlaying ? "global-player--playing" : ""} ${minimized ? "global-player--minimized" : ""}`}
           aria-label="Persistent podcast player"
         >
-          <div className="global-player__art" style={{ backgroundImage: `url(${episode.artwork || "/philosophical-minds-hero.png"})` }} />
+          <div className="global-player__art" style={{ backgroundImage: `url(${episode.artwork || "/philosophical-minds-hero.webp"})` }} />
           <div className="global-player__main">
             <div className="global-player__meta">
               <span>{episode.guest || "Continue listening"}</span>

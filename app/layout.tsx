@@ -40,7 +40,7 @@ export const metadata: Metadata = {
       "Long-form conversations exploring philosophy, metaphysics, consciousness, religion, alchemy, hidden history, and the architecture of human thought.",
     images: [
       {
-        url: "/og.png",
+        url: "/og.jpg",
         width: 1600,
         height: 900,
         alt: "Philosophical Minds hero with classical sculpture, books, and antique instruments.",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Philosophical Minds Podcast",
     description: "The Love of Wisdom: a living archive of philosophical and esoteric inquiry.",
-    images: ["/og.png"],
+    images: ["/og.jpg"],
   },
 };
 

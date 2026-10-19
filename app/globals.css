@@ -88,7 +88,7 @@ main {
 }
 
 .hero__background {
-  background-image: url("/philosophical-minds-hero.png");
+  background-image: url("/philosophical-minds-hero.webp");
   background-position: center;
   background-size: cover;
   filter: saturate(0.95);
@@ -1027,7 +1027,7 @@ section:not(.hero) {
   background:
     linear-gradient(180deg, rgba(7, 7, 7, 0.96), rgba(7, 7, 7, 0.94)),
     radial-gradient(circle at 50% 0%, rgba(210, 170, 111, 0.12), transparent 28rem),
-    url("/philosophical-minds-hero.png") center / cover no-repeat,
+    url("/philosophical-minds-hero.webp") center / cover no-repeat,
     #070707;
   isolation: isolate;
   overflow: hidden;
@@ -1885,7 +1885,7 @@ section:not(.hero) {
 .page-hero {
   background:
     linear-gradient(180deg, rgba(6, 6, 6, 0.6), rgba(6, 6, 6, 0.98)),
-    url("/philosophical-minds-hero.png") center / cover;
+    url("/philosophical-minds-hero.webp") center / cover;
   padding: 10rem clamp(1rem, 4vw, 4rem) 5rem;
 }
 

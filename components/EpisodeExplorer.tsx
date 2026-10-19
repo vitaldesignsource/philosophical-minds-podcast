@@ -122,7 +122,7 @@ export function EpisodeExplorer({ episodes, compact = false }: Props) {
         <div className={`episode-grid episode-grid--${view}`}>
           {visibleEpisodes.map((episode) => (
             <article className="episode-card" key={episode.id}>
-              <div className="episode-card__art" style={{ backgroundImage: `url(${episode.artwork || "/philosophical-minds-hero.png"})` }} />
+              <div className="episode-card__art" style={{ backgroundImage: `url(${episode.artwork || "/philosophical-minds-hero.webp"})` }} />
               <div className="episode-card__body">
                 <div className="meta-line">
                   <span>{episode.displayDate || "Undated"}</span>
