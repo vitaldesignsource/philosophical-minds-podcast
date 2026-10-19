@@ -16,6 +16,7 @@ const ROUTES = [
   "/",
   "/library",
   "/library/hermeticism",
+  "/library/neoplatonism",
   "/episodes",
   "/guests",
   "/topics",
@@ -108,6 +109,14 @@ test("a shelf page renders its full reference entry", async () => {
   for (const expected of ["Corpus Hermeticum", "Emerald Tablet", "Hermes Trismegistus"]) {
     assert.match(html, new RegExp(expected), `shelf page missing ${expected}`);
   }
+});
+
+test("shelves cross-link to one another", async () => {
+  const hermeticism = await (await fetch(`${baseUrl}/library/hermeticism`)).text();
+  assert.match(hermeticism, /href="\/library\/neoplatonism"/);
+  const neoplatonism = await (await fetch(`${baseUrl}/library/neoplatonism`)).text();
+  assert.match(neoplatonism, /href="\/library\/hermeticism"/);
+  assert.match(neoplatonism, /Plotinus/);
 });
 
 test("an unknown shelf returns 404 rather than erroring", async () => {
