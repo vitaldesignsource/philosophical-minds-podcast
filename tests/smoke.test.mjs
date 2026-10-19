@@ -18,6 +18,7 @@ const ROUTES = [
   "/library/hermeticism",
   "/library/neoplatonism",
   "/library/alchemy",
+  "/library/qabalah-and-kabbalah",
   "/episodes",
   "/guests",
   "/topics",
