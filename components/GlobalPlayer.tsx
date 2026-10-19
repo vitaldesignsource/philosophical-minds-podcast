@@ -45,6 +45,10 @@ export function GlobalPlayer({ initialEpisode }: Props) {
     if (saved) {
       try {
         const savedEpisode = JSON.parse(saved) as PodcastEpisode;
+        // Restoring the saved episode can only happen after mount: localStorage
+        // does not exist during server rendering, so there is no value to seed
+        // the initial state with. A single setState on mount is the intended cost.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         if (savedEpisode?.audioUrl) setEpisode(savedEpisode);
       } catch {
         window.localStorage.removeItem(STORAGE_KEY);
