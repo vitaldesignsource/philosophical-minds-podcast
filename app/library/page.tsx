@@ -30,6 +30,11 @@ export default function LibraryPage() {
               <p>{shelf.cardDescription}</p>
             </Link>
           ))}
+          <Link className="route-card route-card--open" href="/library/recommended-books">
+            <p className="eyebrow">Reading paths</p>
+            <h2>Recommended Books</h2>
+            <p>Every title the shelves recommend, gathered in one place with a note on each.</p>
+          </Link>
           {plannedShelves.map((shelf) => (
             <article className="route-card" key={shelf.title}>
               <p className="eyebrow">In preparation</p>

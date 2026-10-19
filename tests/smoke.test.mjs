@@ -19,6 +19,8 @@ const ROUTES = [
   "/library/neoplatonism",
   "/library/alchemy",
   "/library/qabalah-and-kabbalah",
+  "/library/sacred-architecture",
+  "/library/recommended-books",
   "/episodes",
   "/guests",
   "/topics",
@@ -111,6 +113,19 @@ test("a shelf page renders its full reference entry", async () => {
   for (const expected of ["Corpus Hermeticum", "Emerald Tablet", "Hermes Trismegistus"]) {
     assert.match(html, new RegExp(expected), `shelf page missing ${expected}`);
   }
+});
+
+test("the recommended books page aggregates every shelf's reading path", async () => {
+  const html = await (await fetch(`${baseUrl}/library/recommended-books`)).text();
+  // One title drawn from each shelf, so a shelf dropping out of the aggregate fails here.
+  for (const title of ["Hermetica", "Simplicity of Vision", "Secrets of Alchemy", "Very Short Introduction", "Gothic Cathedral"]) {
+    assert.match(html, new RegExp(title), `aggregate missing ${title}`);
+  }
+});
+
+test("the library index has no unwritten shelves left", async () => {
+  const html = await (await fetch(`${baseUrl}/library`)).text();
+  assert.doesNotMatch(html, /In preparation/);
 });
 
 test("shelves cross-link to one another", async () => {

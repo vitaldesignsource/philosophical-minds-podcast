@@ -45,10 +45,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
   }));
 
-  const shelfRoutes = shelves.map((shelf) => ({
-    url: `${baseUrl}/library/${shelf.slug}`,
-    lastModified: new Date(),
-  }));
+  const shelfRoutes = [
+    ...shelves.map((shelf) => ({
+      url: `${baseUrl}/library/${shelf.slug}`,
+      lastModified: new Date(),
+    })),
+    { url: `${baseUrl}/library/recommended-books`, lastModified: new Date() },
+  ];
 
   return [
     ...staticRoutes,
