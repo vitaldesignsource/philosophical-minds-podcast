@@ -270,7 +270,8 @@ export const neoplatonismShelf: Shelf = {
   related: [
     { href: "/library/hermeticism", label: "Hermeticism", kind: "Shelf" },
     { href: "/topics/theurgy-and-ritual", label: "Theurgy and Ritual", kind: "Topic" },
-    { href: "/topics/metaphysics", label: "Metaphysics", kind: "Topic" },
+    { href: "/library/alchemy", label: "Alchemy", kind: "Shelf" },
+  { href: "/topics/metaphysics", label: "Metaphysics", kind: "Topic" },
     { href: "/topics/philosophy", label: "Philosophy", kind: "Topic" },
     { href: "/topics/esoteric-christianity", label: "Esoteric Christianity", kind: "Topic" },
     { href: "/journal/what-is-theurgy", label: "What Is Theurgy?", kind: "Journal" },

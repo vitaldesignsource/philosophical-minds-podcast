@@ -1,16 +1,13 @@
+import { alchemyShelf } from "./alchemy";
 import { hermeticismShelf } from "./hermeticism";
 import { neoplatonismShelf } from "./neoplatonism";
 import type { PlannedShelf, Shelf } from "./library";
 
 /** Shelves with a written reference entry, in reading order. */
-export const shelves: Shelf[] = [hermeticismShelf, neoplatonismShelf];
+export const shelves: Shelf[] = [hermeticismShelf, neoplatonismShelf, alchemyShelf];
 
 /** Shelves the Library announces but has not written yet. */
 export const plannedShelves: PlannedShelf[] = [
-  {
-    title: "Alchemy",
-    cardDescription: "Operations, materials, allegories, laboratory history, and interior transformation.",
-  },
   {
     title: "Qabalah and Kabbalah",
     cardDescription: "Symbolic structures, religious contexts, and esoteric interpretations.",

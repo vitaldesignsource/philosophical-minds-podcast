@@ -17,6 +17,7 @@ const ROUTES = [
   "/library",
   "/library/hermeticism",
   "/library/neoplatonism",
+  "/library/alchemy",
   "/episodes",
   "/guests",
   "/topics",
