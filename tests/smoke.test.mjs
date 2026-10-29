@@ -141,6 +141,68 @@ test("an unknown shelf returns 404 rather than erroring", async () => {
   assert.equal(response.status, 404);
 });
 
+test("every indexable page declares a canonical URL", async () => {
+  for (const route of ROUTES) {
+    const html = await (await fetch(baseUrl + route)).text();
+    const match = html.match(/<link rel="canonical" href="([^"]+)"/);
+    assert.ok(match, `${route} has no canonical link`);
+    assert.equal(
+      match[1],
+      `https://philosophicalmindspodcast.com${route === "/" ? "" : route}`,
+      `${route} canonical points elsewhere`,
+    );
+  }
+});
+
+test("the site declares its podcast and website structured data", async () => {
+  const html = await (await fetch(`${baseUrl}/`)).text();
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)];
+  assert.ok(blocks.length > 0, "no JSON-LD on the homepage");
+  const graph = blocks.map((b) => JSON.parse(b[1])).flatMap((d) => d["@graph"] ?? [d]);
+  const types = graph.map((t) => t["@type"]);
+  assert.ok(types.includes("PodcastSeries"), `expected PodcastSeries, got ${types}`);
+  assert.ok(types.includes("WebSite"), `expected WebSite, got ${types}`);
+});
+
+test("content pages carry their own structured data and breadcrumbs", async () => {
+  const cases = [
+    ["/journal/what-is-theurgy", "Article"],
+    ["/library/hermeticism", "Article"],
+  ];
+  for (const [route, expected] of cases) {
+    const html = await (await fetch(baseUrl + route)).text();
+    const blocks = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)];
+    const graph = blocks.map((b) => JSON.parse(b[1])).flatMap((d) => d["@graph"] ?? [d]);
+    const types = graph.map((t) => t["@type"]);
+    assert.ok(types.includes(expected), `${route} missing ${expected}, got ${types}`);
+    assert.ok(types.includes("BreadcrumbList"), `${route} missing BreadcrumbList`);
+  }
+});
+
+test("every page has a unique title and a social card", async () => {
+  const titles = new Map();
+  for (const route of ROUTES) {
+    const html = await (await fetch(baseUrl + route)).text();
+    const title = html.match(/<title>([^<]*)<\/title>/)?.[1];
+    assert.ok(title, `${route} has no title`);
+    assert.ok(!titles.has(title), `${route} duplicates the title of ${titles.get(title)}`);
+    titles.set(title, route);
+    assert.match(html, /property="og:title"/, `${route} has no OpenGraph title`);
+    assert.match(html, /name="twitter:card"/, `${route} has no Twitter card`);
+  }
+});
+
+test("the advertised feed URL resolves to the real feed", async () => {
+  const response = await fetch(`${baseUrl}/rss`, { redirect: "manual" });
+  assert.ok([301, 302, 307, 308].includes(response.status), `/rss returned ${response.status}`);
+  assert.match(response.headers.get("location") ?? "", /libsyn\.com/);
+});
+
+test("the document head offers feed autodiscovery", async () => {
+  const html = await (await fetch(`${baseUrl}/`)).text();
+  assert.match(html, /type="application\/rss\+xml"/);
+});
+
 test("the server resolved every module it needed", () => {
   for (const pattern of RESOLUTION_FAILURES) {
     assert.doesNotMatch(output, pattern, `server reported a module resolution failure:\n${output}`);

@@ -1,4 +1,6 @@
 import { SiteHeader } from "@/components/SiteHeader";
+import { JsonLd } from "@/components/JsonLd";
+import { articleSchema, breadcrumbSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import { findShelf, shelves } from "@/lib/shelves";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -23,10 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  return {
+  return pageMetadata({
     title: shelf.title,
     description: shelf.summary,
-  };
+    path: `/library/${shelf.slug}`,
+    type: "article",
+  });
 }
 
 export default async function ShelfPage({ params }: Props) {
@@ -35,8 +39,17 @@ export default async function ShelfPage({ params }: Props) {
 
   if (!shelf) notFound();
 
+  const schema = jsonLdGraph(
+    articleSchema({ title: shelf.title, description: shelf.summary, path: `/library/${shelf.slug}` }),
+    breadcrumbSchema([
+      { name: "The Library", path: "/library" },
+      { name: shelf.title, path: `/library/${shelf.slug}` },
+    ]),
+  );
+
   return (
     <main>
+      <JsonLd data={schema} />
       <section className="page-hero shelf-hero">
         <SiteHeader />
         <p className="eyebrow">{shelf.eyebrow}</p>

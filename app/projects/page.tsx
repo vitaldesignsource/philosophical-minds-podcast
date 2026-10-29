@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
 const projects = [
   {
@@ -40,10 +41,12 @@ const affiliatedProjects = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Projects & Collaborations",
-  description: "Selected projects and collaborations connected to Philosophical Minds and Sky Mathis.",
-};
+  description:
+    "Selected projects and collaborations connected to Philosophical Minds and Sky Mathis.",
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   return (

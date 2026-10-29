@@ -1,6 +1,8 @@
 import { GlobalPlayer } from "@/components/GlobalPlayer";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getPodcastFeed } from "@/lib/rss";
+import { FEED_PATH, SITE_TITLE, SITE_URL, jsonLdGraph, podcastSeriesSchema, websiteSchema } from "@/lib/seo";
 import type { Metadata } from "next";
 import { Cinzel, Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
@@ -33,7 +35,11 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
   },
-  metadataBase: new URL("https://philosophicalmindspodcast.com"),
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: SITE_URL,
+    types: { "application/rss+xml": [{ url: FEED_PATH, title: SITE_TITLE }] },
+  },
   openGraph: {
     title: "Philosophical Minds Podcast",
     description:
@@ -67,6 +73,7 @@ export default async function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className={`${inter.variable} ${cinzel.variable} ${cormorant.variable}`}>
+        <JsonLd data={jsonLdGraph(websiteSchema(), podcastSeriesSchema())} />
         {children}
         <SiteFooter />
         <GlobalPlayer initialEpisode={feed.episodes[0]} />

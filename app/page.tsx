@@ -6,6 +6,16 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { getPodcastFeed } from "@/lib/rss";
 import { topicSlug } from "@/lib/topics";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Philosophical Minds Podcast",
+  description:
+    "Long-form conversations on philosophy, metaphysics, consciousness, religion, alchemy, and hidden history, with scholars, authors and practitioners of the Western esoteric traditions.",
+  path: "/",
+});
+
 
 const paths = [
   "Philosophy",

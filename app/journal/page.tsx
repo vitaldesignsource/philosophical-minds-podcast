@@ -1,12 +1,15 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { journalArticles } from "@/lib/journal";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Journal",
-  description: "Essays, episode companions, reading lists, and philosophical studies.",
-};
+  description:
+    "Essays, episode companions, reading lists, and philosophical studies.",
+  path: "/journal",
+});
 
 export default function JournalPage() {
   return (

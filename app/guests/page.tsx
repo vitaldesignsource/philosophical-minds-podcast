@@ -1,12 +1,15 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { getGuestIndex, hasGuestProfile } from "@/lib/guests";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "The Minds",
-  description: "A guest encyclopedia for Philosophical Minds contributors.",
-};
+  description:
+    "A guest encyclopedia for Philosophical Minds contributors.",
+  path: "/guests",
+});
 
 export default function GuestsPage() {
   const guests = getGuestIndex();

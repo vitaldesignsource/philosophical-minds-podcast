@@ -32,8 +32,8 @@ export type PodcastFeed = {
   error?: string;
 };
 
-const PRIMARY_RSS_URL = "https://philosophicalmindspodcast.com/rss";
-const DIRECT_LIBSYN_RSS_URL = "https://rss.libsyn.com/shows/126739/destinations/758595.xml";
+export const PRIMARY_RSS_URL = "https://philosophicalmindspodcast.com/rss";
+export const DIRECT_LIBSYN_RSS_URL = "https://rss.libsyn.com/shows/126739/destinations/758595.xml";
 const LIVE_RSS_TIMEOUT_MS = 4_000;
 
 const parser = new XMLParser({

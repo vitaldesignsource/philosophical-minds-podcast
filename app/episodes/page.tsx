@@ -2,11 +2,14 @@ import { EpisodeExplorer } from "@/components/EpisodeExplorer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getPodcastFeed } from "@/lib/rss";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Episodes",
-  description: "Search and listen through the Philosophical Minds Podcast archive.",
-};
+  description:
+    "Search and listen through the Philosophical Minds Podcast archive.",
+  path: "/episodes",
+});
 
 export default async function EpisodesPage() {
   const feed = await getPodcastFeed();

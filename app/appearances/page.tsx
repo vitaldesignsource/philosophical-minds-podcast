@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
 const youtubeAppearances = [
   {
@@ -36,10 +37,12 @@ const linkedAppearances = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Appearances",
-  description: "Podcast appearances featuring Sky Mathis from Philosophical Minds.",
-};
+  description:
+    "Podcast appearances featuring Sky Mathis from Philosophical Minds.",
+  path: "/appearances",
+});
 
 export default function AppearancesPage() {
   return (

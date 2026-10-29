@@ -1,6 +1,8 @@
 import { PlayEpisodeButton } from "@/components/PlayEpisodeButton";
 import { SiteHeader } from "@/components/SiteHeader";
+import { JsonLd } from "@/components/JsonLd";
 import { getPodcastFeed } from "@/lib/rss";
+import { breadcrumbSchema, jsonLdGraph, pageMetadata, podcastEpisodeSchema } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -21,16 +23,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  return {
+  return pageMetadata({
     title: episode.title,
     description: episode.excerpt,
-    openGraph: {
-      title: episode.title,
-      description: episode.excerpt,
-      images: episode.artwork ? [episode.artwork] : ["/og.jpg"],
-      type: "article",
-    },
-  };
+    path: `/episodes/${episode.slug}`,
+    image: episode.artwork || undefined,
+    type: "article",
+    publishedTime: episode.publishedAt || undefined,
+  });
 }
 
 export default async function EpisodePage({ params }: Props) {
@@ -40,12 +40,21 @@ export default async function EpisodePage({ params }: Props) {
 
   if (!episode) notFound();
 
+  const schema = jsonLdGraph(
+    podcastEpisodeSchema(episode),
+    breadcrumbSchema([
+      { name: "Episodes", path: "/episodes" },
+      { name: episode.title, path: `/episodes/${episode.slug}` },
+    ]),
+  );
+
   const related = feed.episodes
     .filter((item) => item.slug !== episode.slug && item.categories.some((category) => episode.categories.includes(category)))
     .slice(0, 3);
 
   return (
     <main>
+      <JsonLd data={schema} />
       <section className="page-hero">
         <SiteHeader />
         <p className="eyebrow">{episode.displayDate || "Podcast episode"}</p>

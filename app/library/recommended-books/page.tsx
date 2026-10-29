@@ -1,14 +1,16 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { readingByShelf, totalRecommendedBooks } from "@/lib/shelves";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 const total = totalRecommendedBooks();
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Recommended Books",
   description: `Every book the Library recommends — ${total} titles across the reference shelves, each with a note on why it earns its place.`,
-};
+  path: "/library/recommended-books",
+});
 
 export default function RecommendedBooksPage() {
   const groups = readingByShelf();

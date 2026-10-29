@@ -1,11 +1,14 @@
 import { ContactForm } from "@/components/ContactForm";
 import { SiteHeader } from "@/components/SiteHeader";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description: "Send feedback, guest requests, questions, concerns, and collaboration notes to Philosophical Minds.",
-};
+  description:
+    "Send feedback, guest requests, questions, concerns, and collaboration notes to Philosophical Minds.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

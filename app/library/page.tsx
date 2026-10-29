@@ -1,12 +1,15 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { plannedShelves, shelves } from "@/lib/shelves";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "The Library",
-  description: "A philosophical library for thinkers, traditions, symbols, books, and systems.",
-};
+  description:
+    "A philosophical library for thinkers, traditions, symbols, books, and systems.",
+  path: "/library",
+});
 
 export default function LibraryPage() {
   return (

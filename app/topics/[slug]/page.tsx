@@ -1,6 +1,7 @@
 import { EpisodeExplorer } from "@/components/EpisodeExplorer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getPodcastFeed } from "@/lib/rss";
+import { pageMetadata } from "@/lib/seo";
 import { findTopic, topicMatches } from "@/lib/topics";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -21,10 +22,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  return {
-    title: topic.title,
-    description: topic.description,
-  };
+  // A topic page lists conversations; the Library shelf of the same name is the
+  // reference entry. Distinct titles keep the two from competing for one query.
+  return pageMetadata({
+    title: `${topic.title} Episodes`,
+    description: `Philosophical Minds conversations on ${topic.title.toLowerCase()}. ${topic.description}`,
+    path: `/topics/${slug}`,
+  });
 }
 
 export default async function TopicSignalsPage({ params }: Props) {

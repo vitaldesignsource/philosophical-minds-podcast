@@ -1,12 +1,14 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
     "About Philosophical Minds and host Sky Mathis, an author, independent researcher, publisher, and creator working across philosophy, esotericism, and the Western mystery traditions.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

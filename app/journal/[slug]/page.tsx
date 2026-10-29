@@ -1,6 +1,8 @@
 import { MarkdownArticle } from "@/components/MarkdownArticle";
 import { SiteHeader } from "@/components/SiteHeader";
+import { JsonLd } from "@/components/JsonLd";
 import { getJournalArticle, journalArticles } from "@/lib/journal";
+import { articleSchema, breadcrumbSchema, jsonLdGraph, pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,16 +26,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  return {
+  return pageMetadata({
     title: article.title,
     description: article.excerpt,
-    openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      images: [article.image],
-      type: "article",
-    },
-  };
+    path: `/journal/${article.slug}`,
+    image: article.image,
+    type: "article",
+  });
 }
 
 export default async function JournalArticlePage({ params }: Props) {
@@ -42,8 +41,22 @@ export default async function JournalArticlePage({ params }: Props) {
 
   if (!article) notFound();
 
+  const schema = jsonLdGraph(
+    articleSchema({
+      title: article.title,
+      description: article.excerpt,
+      path: `/journal/${article.slug}`,
+      image: article.image,
+    }),
+    breadcrumbSchema([
+      { name: "Journal", path: "/journal" },
+      { name: article.title, path: `/journal/${article.slug}` },
+    ]),
+  );
+
   return (
     <main>
+      <JsonLd data={schema} />
       <section className="page-hero journal-article-hero">
         <SiteHeader />
         <p className="eyebrow">{article.eyebrow}</p>

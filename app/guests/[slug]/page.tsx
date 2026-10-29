@@ -1,5 +1,7 @@
 import { SiteHeader } from "@/components/SiteHeader";
+import { JsonLd } from "@/components/JsonLd";
 import { getGuestProfile, guestProfiles } from "@/lib/guests";
+import { breadcrumbSchema, jsonLdGraph, pageMetadata, personSchema } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -23,10 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  return {
+  return pageMetadata({
     title: profile.name,
     description: profile.summary,
-  };
+    path: `/guests/${profile.slug}`,
+    type: "article",
+  });
 }
 
 export default async function GuestProfilePage({ params }: Props) {
@@ -35,10 +39,19 @@ export default async function GuestProfilePage({ params }: Props) {
 
   if (!profile) notFound();
 
+  const schema = jsonLdGraph(
+    personSchema({ name: profile.name, description: profile.summary, path: `/guests/${profile.slug}` }),
+    breadcrumbSchema([
+      { name: "The Minds", path: "/guests" },
+      { name: profile.name, path: `/guests/${profile.slug}` },
+    ]),
+  );
+
   const profileNumber = guestProfiles.findIndex((entry) => entry.slug === profile.slug) + 1;
 
   return (
     <main>
+      <JsonLd data={schema} />
       <section className="page-hero guest-profile-hero">
         <SiteHeader />
         <p className="eyebrow">Guest Profile</p>

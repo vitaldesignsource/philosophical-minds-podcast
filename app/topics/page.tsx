@@ -2,12 +2,15 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { getPodcastFeed } from "@/lib/rss";
 import { coreTopics, topicMatches, topicSlug } from "@/lib/topics";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Topics",
-  description: "A relational map of Philosophical Minds topics, traditions, and recurring ideas.",
-};
+  description:
+    "A relational map of Philosophical Minds topics, traditions, and recurring ideas.",
+  path: "/topics",
+});
 
 export default async function TopicsPage() {
   const feed = await getPodcastFeed(80);
