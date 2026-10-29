@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { JsonLd } from "@/components/JsonLd";
 import { getPodcastFeed } from "@/lib/rss";
 import { breadcrumbSchema, jsonLdGraph, pageMetadata, podcastEpisodeSchema } from "@/lib/seo";
+import { coreTopics, topicMatches, topicSlug } from "@/lib/topics";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -48,6 +49,8 @@ export default async function EpisodePage({ params }: Props) {
     ]),
   );
 
+  const episodeTopics = coreTopics.filter((topic) => topicMatches(episode, topic));
+
   const related = feed.episodes
     .filter((item) => item.slug !== episode.slug && item.categories.some((category) => episode.categories.includes(category)))
     .slice(0, 3);
@@ -86,6 +89,19 @@ export default async function EpisodePage({ params }: Props) {
                 <span key={category}>{category}</span>
               ))}
             </div>
+
+            {episodeTopics.length > 0 && (
+              <>
+                <h3>Explore These Topics</h3>
+                <div className="tag-row tag-row--links">
+                  {episodeTopics.map((topic) => (
+                    <Link href={`/topics/${topicSlug(topic.title)}`} key={topic.title}>
+                      {topic.title}
+                    </Link>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </article>
       </section>

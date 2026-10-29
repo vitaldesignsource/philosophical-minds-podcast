@@ -203,6 +203,36 @@ test("the document head offers feed autodiscovery", async () => {
   assert.match(html, /type="application\/rss\+xml"/);
 });
 
+test("topic pages lead into the Library", async () => {
+  const html = await (await fetch(`${baseUrl}/topics/alchemy`)).text();
+  assert.match(html, /href="\/library\/alchemy"/, "alchemy topic does not link to its shelf");
+  assert.match(html, /href="\/library\/hermeticism"/, "alchemy topic does not link to Hermeticism");
+});
+
+test("most episode pages lead into the topic map", async () => {
+  // Some episodes arrive from the feed with no categories and no description,
+  // so full coverage is not achievable here. This guards against the matching
+  // regressing to the point where the archive is mostly orphaned.
+  const index = await (await fetch(`${baseUrl}/episodes`)).text();
+  const slugs = [...new Set([...index.matchAll(/href="\/episodes\/([a-z0-9-]+)"/g)].map((m) => m[1]))].slice(0, 12);
+  assert.ok(slugs.length >= 6, "could not find enough episodes to sample");
+
+  let linked = 0;
+  for (const slug of slugs) {
+    const html = await (await fetch(`${baseUrl}/episodes/${slug}`)).text();
+    if (/href="\/topics\//.test(html)) linked++;
+  }
+  assert.ok(
+    linked >= Math.ceil(slugs.length / 2),
+    `only ${linked} of ${slugs.length} sampled episodes link to a topic`,
+  );
+});
+
+test("the Hermeticism topic exists and reaches its shelf", async () => {
+  const html = await (await fetch(`${baseUrl}/topics/hermeticism`)).text();
+  assert.match(html, /href="\/library\/hermeticism"/);
+});
+
 test("the server resolved every module it needed", () => {
   for (const pattern of RESOLUTION_FAILURES) {
     assert.doesNotMatch(output, pattern, `server reported a module resolution failure:\n${output}`);

@@ -2,6 +2,7 @@ import { EpisodeExplorer } from "@/components/EpisodeExplorer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getPodcastFeed } from "@/lib/rss";
 import { pageMetadata } from "@/lib/seo";
+import { findShelf } from "@/lib/shelves";
 import { findTopic, topicMatches } from "@/lib/topics";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -38,6 +39,7 @@ export default async function TopicSignalsPage({ params }: Props) {
 
   const feed = await getPodcastFeed(120);
   const relatedEpisodes = feed.episodes.filter((episode) => topicMatches(episode, topic));
+  const relatedShelves = (topic.shelves ?? []).map(findShelf).filter((shelf) => shelf !== undefined);
 
   return (
     <main>
@@ -55,6 +57,27 @@ export default async function TopicSignalsPage({ params }: Props) {
           </Link>
         </div>
       </section>
+
+      {relatedShelves.length > 0 && (
+        <section className="route-section topic-shelves">
+          <div className="section-heading">
+            <p className="eyebrow">In the Library</p>
+            <h2>Read Further on {topic.title}</h2>
+            <p>
+              Reference entries covering this material as a tradition: its primary texts, central ideas and a reading
+              path.
+            </p>
+          </div>
+          <div className="shelf-links shelf-links--centered">
+            {relatedShelves.map((shelf) => (
+              <Link className="shelf-link" href={`/library/${shelf.slug}`} key={shelf.slug}>
+                <span>Shelf {shelf.number}</span>
+                {shelf.title}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="archive-section">
         <div className="section-heading">
