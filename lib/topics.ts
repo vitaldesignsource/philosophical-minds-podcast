@@ -1,3 +1,4 @@
+import { guestProfiles } from "./guests";
 import type { PodcastEpisode } from "./rss";
 
 export type CoreTopic = {
@@ -61,8 +62,11 @@ export const coreTopics: CoreTopic[] = [
   },
   {
     title: "Religion and Mysticism",
+    // Deliberately excludes "esoteric" and "tradition": almost every guest
+    // summary contains them, so they matched half the archive and identified
+    // nothing.
     description: "Mystical traditions, sacred practice, religious imagination, and contemplative experience.",
-    terms: ["religion", "mysticism", "mystic", "sacred", "contemplative", "tradition", "mystery", "mysteries", "initiation", "kabbalah", "qabalah", "esoteric", "gnosis"],
+    terms: ["religion", "mysticism", "mystic", "sacred", "contemplative", "mystery", "mysteries", "initiation", "kabbalah", "qabalah", "gnosis"],
     shelves: ["qabalah-and-kabbalah", "neoplatonism"],
   },
   {
@@ -91,7 +95,20 @@ export function findTopic(slug: string) {
   return coreTopics.find((topic) => topicSlug(topic.title) === slug);
 }
 
+/**
+ * Some episodes arrive from the feed with no categories and a title that is
+ * only the guest's name, leaving nothing to match on. Where the site already
+ * profiles that guest, their summary says what they work on, which is a fair
+ * description of what the conversation covers. Only the one-line summary is
+ * used; the full biography mentions enough subjects to match almost anything.
+ */
+function guestSummaryFor(episode: PodcastEpisode) {
+  const title = episode.title.toLowerCase();
+  return guestProfiles.find((profile) => title.includes(profile.name.toLowerCase()))?.summary ?? "";
+}
+
 export function topicMatches(episode: PodcastEpisode, topic: CoreTopic) {
-  const haystack = `${episode.title} ${episode.excerpt} ${episode.categories.join(" ")}`.toLowerCase();
+  const haystack =
+    `${episode.title} ${episode.excerpt} ${episode.categories.join(" ")} ${guestSummaryFor(episode)}`.toLowerCase();
   return topic.terms.some((term) => haystack.includes(term.toLowerCase()));
 }
