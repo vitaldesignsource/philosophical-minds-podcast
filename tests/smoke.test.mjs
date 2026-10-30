@@ -18,6 +18,8 @@ const ROUTES = [
   "/library/hermeticism",
   "/library/neoplatonism",
   "/library/alchemies",
+  "/library/alchemies/waidan",
+  "/library/alchemies/rasashastra",
   "/library/qabalah-and-kabbalah",
   "/library/sacred-architecture",
   "/library/gnosticism",
@@ -305,6 +307,30 @@ test("the Alchemies shelf covers more than Europe", async () => {
   for (const expected of ["Waidan", "Neidan", "Rasa", "Cantong qi", "Baopuzi"]) {
     assert.match(html, new RegExp(expected), `Alchemies shelf missing ${expected}`);
   }
+});
+
+test("every alchemical tradition has its own page", async () => {
+  const shelf = await (await fetch(`${baseUrl}/library/alchemies`)).text();
+  const slugs = ["greco-egyptian", "islamic", "latin", "waidan", "neidan", "rasashastra", "chrysopoeia", "iatrochemistry"];
+  for (const slug of slugs) {
+    assert.match(shelf, new RegExp(`href="/library/alchemies/${slug}"`), `shelf does not link to ${slug}`);
+    const page = await fetch(`${baseUrl}/library/alchemies/${slug}`);
+    assert.equal(page.status, 200, `/library/alchemies/${slug} returned ${page.status}`);
+  }
+});
+
+test("a tradition page carries real content, not a stub", async () => {
+  const html = await (await fetch(`${baseUrl}/library/alchemies/neidan`)).text();
+  for (const expected of ["Wuzhen pian", "dantian|Cinnabar Fields", "Zhang Boduan", "Three Treasures"]) {
+    assert.match(html, new RegExp(expected, "i"), `neidan page missing ${expected}`);
+  }
+  // and it leads on to its siblings
+  assert.match(html, /href="\/library\/alchemies\/waidan"/);
+});
+
+test("an unknown tradition 404s rather than erroring", async () => {
+  const response = await fetch(`${baseUrl}/library/alchemies/not-a-tradition`);
+  assert.equal(response.status, 404);
 });
 
 test("the server resolved every module it needed", () => {

@@ -1,3 +1,4 @@
+import { alchemyBranches } from "./alchemyBranches";
 import type { Shelf } from "./library";
 
 export const alchemyShelf: Shelf = {
@@ -29,56 +30,7 @@ export const alchemyShelf: Shelf = {
 
   branches: {
     heading: { eyebrow: "The Plural", title: "Traditions and Methods" },
-    entries: [
-      {
-        title: "Greco-Egyptian",
-        meta: "Alexandria · 1st–4th c. CE",
-        description:
-          "The earliest literature, where craft recipes for metals, dyes and gems meet Greek matter theory. Zosimos of Panopolis writes technical instructions and visionary dreams in the same corpus, apparently without any sense of category violation, and the Western tradition inherits both halves from him.",
-      },
-      {
-        title: "Islamic Alchemy",
-        meta: "Arabic · 8th–12th c.",
-        description:
-          "Where the art becomes systematic. The Jabirian corpus supplies the mercury-sulphur theory that makes transmutation a matter of adjusting proportions, and al-Razi classifies substances and apparatus with a precision not matched for centuries. The word alchemy itself, and the elixir, come through Arabic.",
-      },
-      {
-        title: "Latin Alchemy",
-        meta: "Europe · 12th–18th c.",
-        description:
-          "Translation from Arabic from 1144 onward produces a sophisticated Latin tradition: corpuscular matter theory in the Summa Perfectionis, the emblem books of the seventeenth century, and the chymistry of Newton and Boyle, who pursued transmutation seriously while founding what became modern chemistry.",
-      },
-      {
-        title: "Waidan",
-        meta: "China · external elixir · Han dynasty onward",
-        description:
-          "Laboratory alchemy pursuing an elixir of deathlessness, compounded chiefly from cinnabar and mercury and sealed in crucibles through long graded firings. Ge Hong's Baopuzi is its great compendium. Several Tang emperors are recorded as dying of the elixirs their alchemists prepared, which the tradition absorbed rather than being destroyed by.",
-      },
-      {
-        title: "Neidan",
-        meta: "China · internal elixir · Tang and Song onward",
-        description:
-          "The same vocabulary turned inward: the body becomes the crucible, and the ingredients are the vital substances named jing, qi and shen, refined through meditation, breath and visualisation. Neidan does not reject waidan so much as relocate it, and it becomes the dominant form of Daoist practice.",
-      },
-      {
-        title: "Rasaśāstra",
-        meta: "India · Sanskrit · c. 8th c. onward",
-        description:
-          "Mercurial alchemy bound to medicine and to the pursuit of a perfected body. Mercury, identified with the seed of Śiva, is processed through elaborate purifications; the related rasāyana is one of the eight classical branches of Ayurveda. The aim is less gold than a body that does not decay.",
-      },
-      {
-        title: "Chrysopoeia",
-        meta: "Method · across traditions",
-        description:
-          "Gold-making proper, the aim everyone remembers and the one the sources treat as a single application of the stone rather than its point. It attracted patronage, fraud and legislation in roughly equal measure, including a papal bull of 1317 directed at alchemical counterfeiting.",
-      },
-      {
-        title: "Iatrochemistry",
-        meta: "Method · Europe · 16th c. onward",
-        description:
-          "Paracelsus redirects the art from metals to medicines, adding salt to mercury and sulphur and founding chemical medicine against furious Galenist opposition. Spagyrics, the preparation of plant remedies by separation and recombination, belongs to this turn and is still practised.",
-      },
-    ],
+    entries: alchemyBranches,
   },
 
   texts: {

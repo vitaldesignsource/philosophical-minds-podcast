@@ -4,7 +4,8 @@ import { hermeticismShelf } from "./hermeticism";
 import { kabbalahShelf } from "./kabbalah";
 import { neoplatonismShelf } from "./neoplatonism";
 import { sacredArchitectureShelf } from "./sacredArchitecture";
-import type { PlannedShelf, Shelf } from "./library";
+import { hasOwnPage } from "./library";
+import type { PlannedShelf, Shelf, ShelfBranchPage } from "./library";
 
 /** Shelves with a written reference entry, in reading order. */
 export const shelves: Shelf[] = [
@@ -31,4 +32,15 @@ export function readingByShelf() {
 /** How many books the Library currently recommends. */
 export function totalRecommendedBooks() {
   return shelves.reduce((count, shelf) => count + shelf.reading.entries.length, 0);
+}
+
+/** Branches that carry their own page, paired with the shelf they belong to. */
+export function branchPages(): { shelf: Shelf; branch: ShelfBranchPage }[] {
+  return shelves.flatMap((shelf) =>
+    (shelf.branches?.entries ?? []).filter(hasOwnPage).map((branch) => ({ shelf, branch })),
+  );
+}
+
+export function findBranch(shelfSlug: string, branchSlug: string) {
+  return branchPages().find(({ shelf, branch }) => shelf.slug === shelfSlug && branch.slug === branchSlug);
 }

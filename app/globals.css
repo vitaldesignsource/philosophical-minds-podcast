@@ -3547,3 +3547,40 @@ select option {
   top: 0.01em;
   width: 0.72em;
 }
+
+/* A branch card that leads somewhere should say so. */
+.shelf-text--link {
+  display: block;
+  position: relative;
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.shelf-text--link::after {
+  border-right: 1px solid rgba(210, 170, 111, 0.7);
+  border-top: 1px solid rgba(210, 170, 111, 0.7);
+  bottom: 1.2rem;
+  content: "";
+  height: 0.42rem;
+  position: absolute;
+  right: 1.2rem;
+  transform: rotate(45deg);
+  width: 0.42rem;
+}
+
+.shelf-text--link:hover {
+  border-color: rgba(210, 170, 111, 0.55);
+  transform: translateY(-2px);
+}
+
+/* The rail shows a shelf name rather than a number on branch pages. */
+.shelf-rail > strong {
+  font-size: 4.6rem;
+  overflow-wrap: anywhere;
+}
+
+.shelf-rail > strong:not(:only-of-type) {
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  line-height: 1.15;
+}

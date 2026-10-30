@@ -53,7 +53,27 @@ export type ShelfBranch = {
   /** Region and period, or whatever situates the strand. */
   meta: string;
   description: string;
+  /**
+   * When a branch carries its own page, it needs a slug and enough substance
+   * to deserve one. A branch with a slug but no overview would be a thin page,
+   * so the renderer requires both.
+   */
+  slug?: string;
+  summary?: string;
+  overview?: string[];
+  /** What distinguishes this strand in practice. */
+  markers?: { heading: ShelfHeading; entries: ShelfPrinciple[] };
+  texts?: { heading: ShelfHeading; entries: ShelfText[] };
+  reading?: { heading: ShelfHeading; entries: ShelfReading[] };
 };
+
+/** A branch that has everything its own page needs. */
+export type ShelfBranchPage = ShelfBranch &
+  Required<Pick<ShelfBranch, "slug" | "summary" | "overview" | "markers" | "texts" | "reading">>;
+
+export function hasOwnPage(branch: ShelfBranch): branch is ShelfBranchPage {
+  return Boolean(branch.slug && branch.overview && branch.markers && branch.texts && branch.reading);
+}
 
 /** A caveat worth stating plainly, so a reading path does not mislead. */
 export type ShelfCaution = {

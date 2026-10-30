@@ -1,5 +1,5 @@
 import { journalArticles } from "@/lib/journal";
-import { shelves } from "@/lib/shelves";
+import { branchPages, shelves } from "@/lib/shelves";
 import { coreTopics, topicSlug } from "@/lib/topics";
 import { guestProfiles } from "@/lib/guests";
 import { getPodcastFeed } from "@/lib/rss";
@@ -51,6 +51,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
     })),
     { url: `${baseUrl}/library/recommended-books`, lastModified: new Date() },
+    ...branchPages().map(({ shelf, branch }) => ({
+      url: `${baseUrl}/library/${shelf.slug}/${branch.slug}`,
+      lastModified: new Date(),
+    })),
   ];
 
   return [
