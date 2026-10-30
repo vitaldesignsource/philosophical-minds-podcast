@@ -2581,24 +2581,41 @@ select option {
       linear-gradient(0deg, rgba(6, 6, 6, 0.94) 0%, transparent 52%);
   }
 
+  /*
+   * The mark sat about half a rem from the panel edge, which read as cramped
+   * at phone width. Centring it vertically rather than pinning it to the top
+   * keeps the clearance balanced whatever the panel height, and the panel is
+   * less opaque so the hero behind it stays part of the picture.
+   */
   .site-nav {
     align-items: center;
+    background: rgba(5, 5, 5, 0.4);
     display: flex;
     justify-content: flex-start;
-    min-height: 7.5rem;
-    padding: 0.65rem;
+    min-height: 8.25rem;
+    padding: 0.9rem;
   }
 
   .site-nav .brand-mark {
-    height: 6.45rem;
+    height: 6.1rem;
     left: 50%;
-    top: 0.5rem;
-    transform: translateX(-50%);
-    width: min(10.5rem, 46vw);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(10rem, 44vw);
+  }
+
+  /* The scrim behind the mark softens with the panel, or it reads as a blob. */
+  .site-nav .brand-mark::before {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(5, 5, 5, 0.8) 0 42%,
+      rgba(5, 5, 5, 0.6) 58%,
+      transparent 76%
+    );
   }
 
   .site-nav .brand-mark:hover {
-    transform: translateX(-50%) scale(1.025);
+    transform: translate(-50%, -50%) scale(1.025);
   }
 
   .site-nav__toggle {
