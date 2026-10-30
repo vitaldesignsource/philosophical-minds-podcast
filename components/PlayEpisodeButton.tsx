@@ -1,5 +1,6 @@
 "use client";
 
+import { PlayGlyph } from "@/components/PlayGlyph";
 import type { PodcastEpisode } from "@/lib/rss";
 
 type Props = {
@@ -19,7 +20,7 @@ export function PlayEpisodeButton({ episode, variant = "primary", label = "Play"
 
   return (
     <button className={`play-button play-button--${variant}`} type="button" onClick={playEpisode}>
-      <span aria-hidden="true">▶</span>
+      <PlayGlyph />
       <span>{label}</span>
     </button>
   );

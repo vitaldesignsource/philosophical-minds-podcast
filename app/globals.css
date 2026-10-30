@@ -3517,3 +3517,16 @@ select option {
   background: rgba(210, 170, 111, 0.09);
   border-color: rgba(210, 170, 111, 0.55);
 }
+
+/*
+ * The play mark. Sized in em so it tracks the button's type rather than being
+ * pinned to a pixel size, and nudged optically: a triangle reads as sitting
+ * low and slightly right of where its bounding box puts it.
+ */
+.play-glyph {
+  flex: none;
+  height: 0.82em;
+  position: relative;
+  top: 0.01em;
+  width: 0.72em;
+}

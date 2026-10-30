@@ -274,6 +274,26 @@ test("every hero asset the pages reference is actually served", async () => {
   }
 });
 
+test("no emoji or system glyphs are rendered in the UI", async () => {
+  // U+25B6 and its kin take an emoji presentation on most platforms, which no
+  // stylesheet can reach. Icons must be drawn, not typed.
+  const forbidden = /[\u{1F300}-\u{1FAFF}\u{2190}-\u{21FF}\u{2460}-\u{27BF}\u{2B00}-\u{2BFF}\u{25A0}-\u{25FF}\u{FE0F}]/u;
+  for (const route of ROUTES) {
+    const html = await (await fetch(baseUrl + route)).text();
+    const body = html.replace(/<script[\s\S]*?<\/script>/g, "");
+    const match = body.match(forbidden);
+    assert.ok(
+      !match,
+      `${route} renders ${JSON.stringify(match?.[0])} (U+${match?.[0].codePointAt(0).toString(16).toUpperCase()})`,
+    );
+  }
+});
+
+test("the play control is a drawn glyph", async () => {
+  const html = await (await fetch(`${baseUrl}/episodes`)).text();
+  assert.match(html, /class="play-glyph"/, "the play button is not using the drawn glyph");
+});
+
 test("the server resolved every module it needed", () => {
   for (const pattern of RESOLUTION_FAILURES) {
     assert.doesNotMatch(output, pattern, `server reported a module resolution failure:\n${output}`);
