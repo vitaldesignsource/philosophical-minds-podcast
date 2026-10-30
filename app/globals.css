@@ -33,7 +33,12 @@ html {
 }
 
 body {
+  /* The player is fixed to the bottom on every page, so the document has to
+     reserve its footprint or the last section and the footer sit underneath it.
+     Measured against the rendered player, not its min-height. */
+  --player-footprint: 16rem;
   margin: 0;
+  padding-bottom: var(--player-footprint);
   background:
     radial-gradient(circle at 20% 0%, rgba(143, 98, 56, 0.18), transparent 28rem),
     linear-gradient(180deg, #050505 0%, #10100f 42%, #090c10 100%);
@@ -2867,6 +2872,10 @@ select option {
 
   .episode-playlist__details h3 {
     overflow-wrap: anywhere;
+  }
+
+  body {
+    --player-footprint: 21rem;
   }
 
   .global-player {

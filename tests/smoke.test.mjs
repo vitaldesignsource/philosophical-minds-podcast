@@ -124,9 +124,25 @@ test("the recommended books page aggregates every shelf's reading path", async (
   }
 });
 
-test("the library index has no unwritten shelves left", async () => {
+test("announced shelves are never clickable before they are written", async () => {
+  // Planned shelves are advertised on the Library index on purpose. What must
+  // not happen is one of them linking somewhere, because there is nothing to
+  // link to yet and the reader would land on a 404.
   const html = await (await fetch(`${baseUrl}/library`)).text();
-  assert.doesNotMatch(html, /In preparation/);
+  const cards = [...html.matchAll(/<(a|article)\b[^>]*class="[^"]*route-card[^"]*"[^>]*>(.*?)<\/\1>/gs)];
+  assert.ok(cards.length > 0, "no shelf cards found on the Library index");
+
+  const planned = cards.filter(([, , body]) => /In preparation/.test(body));
+  for (const [, tag] of planned) {
+    assert.equal(tag, "article", "an announced shelf is a link but has no page yet");
+  }
+
+  // And every card that IS a link must resolve.
+  const hrefs = [...html.matchAll(/class="[^"]*route-card[^"]*"\s+href="([^"]+)"/g)].map((m) => m[1]);
+  for (const href of hrefs) {
+    const status = (await fetch(baseUrl + href)).status;
+    assert.equal(status, 200, `${href} is linked from the Library but returned ${status}`);
+  }
 });
 
 test("shelves cross-link to one another", async () => {

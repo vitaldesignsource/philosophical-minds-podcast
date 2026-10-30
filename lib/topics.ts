@@ -18,13 +18,13 @@ export const coreTopics: CoreTopic[] = [
     title: "Philosophy",
     description: "Wisdom, inquiry, classical thought, ethics, metaphysics, and the act of thinking itself.",
     terms: ["philosophy", "philosophical", "wisdom", "plato", "aristotle", "socrates"],
-    shelves: ["neoplatonism"],
+    shelves: ["philosophies", "neoplatonism", "daoism"],
   },
   {
     title: "Metaphysics",
     description: "Being, causality, spirit, form, matter, reality, and the structure beneath appearances.",
     terms: ["metaphysics", "metaphysical", "being", "reality", "form", "matter"],
-    shelves: ["neoplatonism", "hermeticism"],
+    shelves: ["philosophies", "neoplatonism", "hermeticism"],
   },
   {
     title: "Hermeticism",
@@ -36,7 +36,7 @@ export const coreTopics: CoreTopic[] = [
     title: "Alchemy",
     description: "Laboratory, symbolic, and psycho-spiritual traditions of transformation.",
     terms: ["alchemy", "alchemical", "laboratory", "transmutation", "rosicrucian", "elixir", "spagyric", "chymistry"],
-    shelves: ["alchemies", "hermeticism"],
+    shelves: ["alchemies", "hermeticism", "daoism"],
   },
   {
     title: "Theurgy and Ritual",
@@ -48,12 +48,13 @@ export const coreTopics: CoreTopic[] = [
     title: "Consciousness",
     description: "Mind, matter, liminality, perception, and the hard edges of experience.",
     terms: ["consciousness", "mind", "psyche", "perception", "liminality", "dream", "vision", "imagination", "soul"],
+    shelves: ["philosophies", "daoism"],
   },
   {
     title: "Esoteric Christianity",
     description: "Mystical theology, symbolic reading, initiation, and sacred history.",
     terms: ["esoteric christianity", "christian", "gnostic", "gnosticism", "rosicrucian", "mystical theology"],
-    shelves: ["qabalah-and-kabbalah", "hermeticism"],
+    shelves: ["gnosticism", "qabalah-and-kabbalah", "hermeticism"],
   },
   {
     title: "Hidden History",
@@ -67,7 +68,7 @@ export const coreTopics: CoreTopic[] = [
     // nothing.
     description: "Mystical traditions, sacred practice, religious imagination, and contemplative experience.",
     terms: ["religion", "mysticism", "mystic", "sacred", "contemplative", "mystery", "mysteries", "initiation", "kabbalah", "qabalah", "gnosis"],
-    shelves: ["qabalah-and-kabbalah", "neoplatonism"],
+    shelves: ["qabalah-and-kabbalah", "neoplatonism", "gnosticism", "daoism"],
   },
   {
     title: "Science and the Ether",

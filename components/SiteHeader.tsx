@@ -10,10 +10,12 @@ const NAV_ITEMS = [
   ["/projects", "Projects"],
   ["/appearances", "Appearances"],
   ["/library", "Library"],
+  ["/library/philosophies", "Philosophies"],
   ["/journal", "Journal"],
   ["/about", "About"],
   ["/contact", "Contact"],
-  ["/admin", "Admin"],
+  // /admin is deliberately absent: it is passcode-gated and noindexed, and
+  // advertising an owner console on every public page serves nobody.
 ] as const;
 
 export function SiteHeader() {

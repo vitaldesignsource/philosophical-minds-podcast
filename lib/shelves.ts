@@ -1,4 +1,6 @@
 import { alchemiesShelf } from "./alchemies";
+import { daoismShelf } from "./daoism";
+import { gnosticismShelf } from "./gnosticism";
 import { hermeticismShelf } from "./hermeticism";
 import { kabbalahShelf } from "./kabbalah";
 import { neoplatonismShelf } from "./neoplatonism";
@@ -14,10 +16,23 @@ export const shelves: Shelf[] = [
   kabbalahShelf,
   sacredArchitectureShelf,
   philosophiesShelf,
+  daoismShelf,
+  gnosticismShelf,
 ];
 
 /** Shelves the Library announces but has not written yet. */
-export const plannedShelves: PlannedShelf[] = [];
+export const plannedShelves: PlannedShelf[] = [
+  {
+    title: "Theurgy and Ritual",
+    cardDescription:
+      "Divine symbols, invocation, the grimoire traditions, and ritual as a means of knowledge rather than a substitute for it.",
+  },
+  {
+    title: "Tantra and the Dharmic Systems",
+    cardDescription:
+      "The darśanas, Buddhist philosophy, Kashmir Śaivism, and the tantric body as an instrument of liberation.",
+  },
+];
 
 export function findShelf(slug: string) {
   return shelves.find((shelf) => shelf.slug === slug);
