@@ -274,7 +274,7 @@ export const neoplatonismShelf: Shelf = {
     { href: "/library/hermeticism", label: "Hermeticism", kind: "Shelf" },
   { href: "/library/gnosticism", label: "Gnosticism", kind: "Shelf" },
     { href: "/topics/theurgy-and-ritual", label: "Theurgy and Ritual", kind: "Topic" },
-    { href: "/library/alchemy", label: "Alchemy", kind: "Shelf" },
+    { href: "/library/alchemies", label: "Alchemies", kind: "Shelf" },
   { href: "/library/qabalah-and-kabbalah", label: "Qabalah and Kabbalah", kind: "Shelf" },
   { href: "/topics/metaphysics", label: "Metaphysics", kind: "Topic" },
     { href: "/topics/philosophy", label: "Philosophy", kind: "Topic" },

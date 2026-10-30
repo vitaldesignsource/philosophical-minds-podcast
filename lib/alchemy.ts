@@ -1,31 +1,85 @@
 import type { Shelf } from "./library";
 
 export const alchemyShelf: Shelf = {
-  slug: "alchemy",
+  slug: "alchemies",
   number: "03",
-  title: "Alchemy",
-  eyebrow: "The Great Work",
-  cardDescription: "Operations, materials, allegories, laboratory history, and interior transformation.",
+  title: "Alchemies",
+  eyebrow: "The Great Works",
+  cardDescription: "Chinese, Indian, Islamic and European traditions; operations, materials, allegories and interior work.",
   summary:
-    "Fifteen centuries of work at the furnace: what the alchemists actually did, the language they hid it in, and why the split between laboratory and soul is a modern invention.",
+    "Not one art but several: the Chinese, Indian, Islamic and European traditions of transformation, what each actually practised, and why the split between laboratory and soul is a modern invention.",
 
   heroImage: "/shelf-alchemies.webp",
   heroImageAlt:
     "Glass and copper vessels ranged along a workbench, an alembic and crucibles lit from one side.",
   facts: [
-    { label: "Origin", value: "Greco-Roman Egypt, chiefly Alexandria" },
-    { label: "Period", value: "c. 200 CE to the eighteenth century" },
-    { label: "Languages", value: "Greek, Arabic, Latin, then the vernaculars" },
-    { label: "Earliest named practitioners", value: "Maria the Jewess, Zosimos of Panopolis" },
-    { label: "Philosophical setting", value: "Aristotelian matter theory, Stoic pneuma, Hermetic cosmology" },
+    { label: "Traditions", value: "Greco-Egyptian, Islamic, European, Chinese, Indian" },
+    { label: "Period", value: "c. 200 BCE to the eighteenth century" },
+    { label: "Languages", value: "Greek, Arabic, Latin, Chinese, Sanskrit" },
+    { label: "Shared instrument", value: "The furnace, and a theory of matter that can be worked" },
+    { label: "Shared aim", value: "Perfection of a substance, a body, or both at once" },
   ],
 
   overview: [
-    "Alchemy is routinely introduced as chemistry's embarrassing predecessor: credulous people heating substances in the hope of making gold, who accidentally invented distillation along the way. Almost nothing about that picture survives contact with the sources. Alchemists were careful experimentalists with a coherent theory of matter, working in a tradition that lasted longer than modern chemistry has yet existed, and they produced real results — mineral acids, phosphorus, antimony compounds, a great deal of pharmacy.",
-    "The tradition begins in Greco-Roman Egypt, where the practical crafts of metallurgy, dyeing and gem-making met Greek natural philosophy. The first substantial text, circulating under the name of Democritus, is largely recipes. By about 300 the picture is stranger and richer: Zosimos of Panopolis writes technical instructions for apparatus in one breath and, in the next, records a dream of a priest at an altar who dismembers himself and is transformed. Both belong to the same body of work, by the same author, apparently without any sense of category violation.",
-    "That refusal to separate is the heart of the matter. Later readers wanted two alchemies: a practical one that became chemistry and a spiritual one that became psychology. The sources do not cooperate. The same writers describe furnace temperatures and the purification of the operator, because they held that the work on matter and the work on the worker were one undertaking. Matter itself was alive, tending toward perfection, and the alchemist was assisting a process nature already intended — which is exactly why he had to be fit to assist it.",
-    "The texts are deliberately obscure. Alchemists used cover names, calling one substance by the name of another, and described operations in allegory, mythology and sequences of images. This was not confusion but policy: the knowledge was held to be dangerous in careless hands, and an apprenticeship was meant to be served. The consequence is that alchemical writing cannot be read straight. It must be decoded, and the decoding is only now being done with any rigour — much of what we securely know about what these operations actually were has been established in the last forty years, often by historians who repeated the procedures in a laboratory and watched what happened.",
+    "There is no such thing as alchemy, only alchemies. At least four substantial traditions developed independently or semi-independently — in Greco-Roman Egypt, in the Islamic world, in Latin Europe, in China, and in India — and while they converge on certain things with striking regularity, they are not one art with regional accents. They ask different questions, pursue different ends, and would in several cases have found each other's aims beside the point.",
+    "What they share is a conviction that matter is not inert. It has a tendency, a direction, a perfection it is moving toward slowly, and the alchemist's work is to assist and accelerate that movement. From this follows the furnace, the long repetitions, the insistence on patience, and the conviction that an impure operator produces an impure result. Where they differ is in what perfection means: gold for some, an elixir of deathlessness for others, a medicine, or a transformed body.",
+    "The Western line is the one usually told. It begins in Alexandria where metallurgy and dyeing meet Greek matter theory, is systematised in Arabic into the mercury-sulphur account that governs everything downstream, enters Latin in the twelfth century, and reaches its most ambitious and most experimental phase in the seventeenth before chemistry detaches from it. The Chinese line runs on a different axis entirely: from laboratory elixirs of cinnabar and mercury toward an internal practice in which the body itself becomes the vessel. The Indian tradition binds mercury to medicine and to the pursuit of a perfected, deathless body.",
+    "The texts across all of them are deliberately obscure, using cover names and allegory because the knowledge was held to be dangerous in careless hands. The consequence is that alchemical writing cannot be read straight; it must be decoded, and much of what we securely know about what these operations actually were has been established only in the last forty years, often by historians who repeated the procedures and watched what happened.",
   ],
+
+  branches: {
+    heading: { eyebrow: "The Plural", title: "Traditions and Methods" },
+    entries: [
+      {
+        title: "Greco-Egyptian",
+        meta: "Alexandria · 1st–4th c. CE",
+        description:
+          "The earliest literature, where craft recipes for metals, dyes and gems meet Greek matter theory. Zosimos of Panopolis writes technical instructions and visionary dreams in the same corpus, apparently without any sense of category violation, and the Western tradition inherits both halves from him.",
+      },
+      {
+        title: "Islamic Alchemy",
+        meta: "Arabic · 8th–12th c.",
+        description:
+          "Where the art becomes systematic. The Jabirian corpus supplies the mercury-sulphur theory that makes transmutation a matter of adjusting proportions, and al-Razi classifies substances and apparatus with a precision not matched for centuries. The word alchemy itself, and the elixir, come through Arabic.",
+      },
+      {
+        title: "Latin Alchemy",
+        meta: "Europe · 12th–18th c.",
+        description:
+          "Translation from Arabic from 1144 onward produces a sophisticated Latin tradition: corpuscular matter theory in the Summa Perfectionis, the emblem books of the seventeenth century, and the chymistry of Newton and Boyle, who pursued transmutation seriously while founding what became modern chemistry.",
+      },
+      {
+        title: "Waidan",
+        meta: "China · external elixir · Han dynasty onward",
+        description:
+          "Laboratory alchemy pursuing an elixir of deathlessness, compounded chiefly from cinnabar and mercury and sealed in crucibles through long graded firings. Ge Hong's Baopuzi is its great compendium. Several Tang emperors are recorded as dying of the elixirs their alchemists prepared, which the tradition absorbed rather than being destroyed by.",
+      },
+      {
+        title: "Neidan",
+        meta: "China · internal elixir · Tang and Song onward",
+        description:
+          "The same vocabulary turned inward: the body becomes the crucible, and the ingredients are the vital substances named jing, qi and shen, refined through meditation, breath and visualisation. Neidan does not reject waidan so much as relocate it, and it becomes the dominant form of Daoist practice.",
+      },
+      {
+        title: "Rasaśāstra",
+        meta: "India · Sanskrit · c. 8th c. onward",
+        description:
+          "Mercurial alchemy bound to medicine and to the pursuit of a perfected body. Mercury, identified with the seed of Śiva, is processed through elaborate purifications; the related rasāyana is one of the eight classical branches of Ayurveda. The aim is less gold than a body that does not decay.",
+      },
+      {
+        title: "Chrysopoeia",
+        meta: "Method · across traditions",
+        description:
+          "Gold-making proper, the aim everyone remembers and the one the sources treat as a single application of the stone rather than its point. It attracted patronage, fraud and legislation in roughly equal measure, including a papal bull of 1317 directed at alchemical counterfeiting.",
+      },
+      {
+        title: "Iatrochemistry",
+        meta: "Method · Europe · 16th c. onward",
+        description:
+          "Paracelsus redirects the art from metals to medicines, adding salt to mercury and sulphur and founding chemical medicine against furious Galenist opposition. Spagyrics, the preparation of plant remedies by separation and recombination, belongs to this turn and is still practised.",
+      },
+    ],
+  },
 
   texts: {
     heading: { eyebrow: "Primary Sources", title: "The Core Texts" },
@@ -61,6 +115,24 @@ export const alchemyShelf: Shelf = {
           "The most influential alchemical work of the Latin Middle Ages, written under Jabir's Latinised name but shown by modern scholarship to be the work of Paul of Taranto. It argues that substances are built from tightly packed corpuscles, an account of matter that fed directly into seventeenth-century natural philosophy. Sober, systematic, and almost free of allegory.",
       },
       {
+        title: "The Cantong qi",
+        meta: "Chinese · attributed to Wei Boyang · c. 2nd c. CE",
+        description:
+          "The Token for Joining the Three, the foundational text of Chinese alchemy and among the most commented-upon works in the tradition. It aligns the Book of Changes, Daoist cosmology and the work of the furnace into one system, in language compressed to the point of obscurity, and both waidan and neidan read themselves back into it.",
+      },
+      {
+        title: "Baopuzi Neipian",
+        meta: "Ge Hong · Chinese · c. 320",
+        description:
+          "The Master Who Embraces Simplicity, the great compendium of external alchemy. Ge Hong argues at length that deathlessness is attainable, catalogues elixirs and their ingredients, and is scathing about those who expect results without the required solitude, expense and years. The best single window onto what waidan practitioners believed they were doing.",
+      },
+      {
+        title: "Rasārṇava",
+        meta: "Sanskrit · c. 12th century",
+        description:
+          "The Flood of Mercury, a central text of rasaśāstra, framed as a dialogue between Śiva and the Goddess. It sets out the purification of mercury through a graded series of operations, and is explicit that the same preparations which transmute base metal also perfect the body that takes them.",
+      },
+      {
         title: "Rosarium Philosophorum",
         meta: "Printed 1550 · woodcut series",
         description:
@@ -77,7 +149,7 @@ export const alchemyShelf: Shelf = {
 
   caution: {
     eyebrow: "A Necessary Caution",
-    body: "The idea that alchemy was really about inner transformation, with the furnace as mere allegory, is not an ancient teaching. It took shape in the nineteenth century with Mary Anne Atwood's Suggestive Inquiry of 1850 and Ethan Allen Hitchcock's Remarks of 1857, and reached its most powerful form in Jung, who read the texts as projections of unconscious processes. That reading is genuinely illuminating about Jung and about symbolism, and it is a twentieth-century interpretation rather than a historical account. Lawrence Principe and William Newman have shown that the alchemists overwhelmingly meant what they said about metals. The interior dimension is real and it is not a substitute for the laboratory; treat any source that offers you one without the other with caution.",
+    body: "The idea that alchemy was really about inner transformation, with the furnace as mere allegory, is not an ancient teaching. It took shape in the nineteenth century with Mary Anne Atwood's Suggestive Inquiry of 1850 and Ethan Allen Hitchcock's Remarks of 1857, and reached its most powerful form in Jung, who read the texts as projections of unconscious processes. That reading is genuinely illuminating about Jung and about symbolism, and it is a twentieth-century interpretation rather than a historical account. Lawrence Principe and William Newman have shown that the alchemists overwhelmingly meant what they said about metals. The interior dimension is real and it is not a substitute for the laboratory; treat any source that offers you one without the other with caution. A second flattening is just as common: treating the Chinese, Indian and European traditions as one perennial art wearing local costume. They converge in places, genuinely and interestingly, but they arose separately and wanted different things, and the convergences are worth more when the differences are kept in view.",
   },
 
   principles: {
@@ -162,6 +234,18 @@ export const alchemyShelf: Shelf = {
           "Alchemy is systematised in Arabic. The Jabirian corpus supplies the mercury-sulphur theory, and al-Razi classifies substances and apparatus with a precision that would not be matched for centuries. The word itself comes through Arabic, al-kimiya, as does the elixir.",
       },
       {
+        period: "2nd–4th c. CE",
+        title: "China: The Furnace and the Elixir",
+        description:
+          "The Cantong qi takes shape and Ge Hong compiles the Baopuzi. Chinese alchemy develops on its own terms, pursuing deathlessness rather than gold, and with no contact with Alexandria.",
+      },
+      {
+        period: "8th–13th c.",
+        title: "India and the Turn Inward",
+        description:
+          "Rasaśāstra binds mercury to medicine in Sanskrit sources, while in China neidan relocates the whole operation into the practitioner's body. Two traditions arrive independently at the idea that the vessel might be the alchemist.",
+      },
+      {
         period: "1144",
         title: "Alchemy Enters Latin",
         description:
@@ -240,6 +324,18 @@ export const alchemyShelf: Shelf = {
         note: "Best met in an edition that reproduces the engravings and includes the music. The emblems reward slow looking in a way no paraphrase conveys.",
       },
       {
+        stage: "For China",
+        title: "Great Clarity",
+        author: "Fabrizio Pregadio",
+        note: "Daoist alchemy in early medieval China, by the scholar who has done most to make the tradition legible in English. Clear on the relationship between the external elixir and the internal work that displaced it.",
+      },
+      {
+        stage: "For India",
+        title: "The Alchemical Body",
+        author: "David Gordon White",
+        note: "Siddha alchemy and its mercurial pursuit of a perfected, deathless body, traced through Sanskrit sources and the traditions surrounding them. The standard work, and unlike anything in the European literature.",
+      },
+      {
         stage: "For the psychological reading",
         title: "Psychology and Alchemy",
         author: "C. G. Jung",
@@ -267,6 +363,8 @@ export const alchemyShelf: Shelf = {
       { term: "Tria prima", gloss: "Paracelsus's three principles — salt, sulphur and mercury — underlying body, soul and spirit." },
       { term: "Athanor", gloss: "The slow furnace, built to hold a steady heat for the weeks or months a stage required." },
       { term: "Chrysopoeia", gloss: "Gold-making; one application of the stone rather than the whole aim of the art." },
+      { term: "Waidan", gloss: "External elixir; Chinese laboratory alchemy, worked in crucibles over graded fires." },
+      { term: "Neidan", gloss: "Internal elixir; the same operation relocated into the practitioner's own body." },
     ],
   },
 

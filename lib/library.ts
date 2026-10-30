@@ -43,6 +43,18 @@ export type ShelfLink = {
   kind: string;
 };
 
+/**
+ * A distinct strand within a tradition — a regional lineage, a school, or a
+ * method pursued for its own ends. Used where a shelf covers something plural
+ * enough that one narrative would misrepresent it.
+ */
+export type ShelfBranch = {
+  title: string;
+  /** Region and period, or whatever situates the strand. */
+  meta: string;
+  description: string;
+};
+
 /** A caveat worth stating plainly, so a reading path does not mislead. */
 export type ShelfCaution = {
   eyebrow: string;
@@ -71,6 +83,8 @@ export type Shelf = {
   facts: ShelfFact[];
   overview: string[];
   texts: { heading: ShelfHeading; entries: ShelfText[] };
+  /** Optional. The distinct strands the shelf covers, where there is more than one. */
+  branches?: { heading: ShelfHeading; entries: ShelfBranch[] };
   caution?: ShelfCaution;
   principles: { heading: ShelfHeading; entries: ShelfPrinciple[] };
   eras: { heading: ShelfHeading; entries: ShelfEra[] };

@@ -95,6 +95,24 @@ export default async function ShelfPage({ params }: Props) {
               ))}
             </div>
 
+            {shelf.branches && (
+              <div className="shelf-block">
+                <div className="shelf-block__heading">
+                  <p className="eyebrow">{shelf.branches.heading.eyebrow}</p>
+                  <h2>{shelf.branches.heading.title}</h2>
+                </div>
+                <div className="shelf-texts">
+                  {shelf.branches.entries.map((branch) => (
+                    <article className="shelf-text" key={branch.title}>
+                      <p className="eyebrow">{branch.meta}</p>
+                      <h3>{branch.title}</h3>
+                      <p>{branch.description}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="shelf-block">
               <div className="shelf-block__heading">
                 <p className="eyebrow">{shelf.texts.heading.eyebrow}</p>

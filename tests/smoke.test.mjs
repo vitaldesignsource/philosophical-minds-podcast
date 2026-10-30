@@ -17,7 +17,7 @@ const ROUTES = [
   "/library",
   "/library/hermeticism",
   "/library/neoplatonism",
-  "/library/alchemy",
+  "/library/alchemies",
   "/library/qabalah-and-kabbalah",
   "/library/sacred-architecture",
   "/library/gnosticism",
@@ -206,7 +206,7 @@ test("the document head offers feed autodiscovery", async () => {
 
 test("topic pages lead into the Library", async () => {
   const html = await (await fetch(`${baseUrl}/topics/alchemy`)).text();
-  assert.match(html, /href="\/library\/alchemy"/, "alchemy topic does not link to its shelf");
+  assert.match(html, /href="\/library\/alchemies"/, "alchemy topic does not link to its shelf");
   assert.match(html, /href="\/library\/hermeticism"/, "alchemy topic does not link to Hermeticism");
 });
 
@@ -292,6 +292,19 @@ test("no emoji or system glyphs are rendered in the UI", async () => {
 test("the play control is a drawn glyph", async () => {
   const html = await (await fetch(`${baseUrl}/episodes`)).text();
   assert.match(html, /class="play-glyph"/, "the play button is not using the drawn glyph");
+});
+
+test("the old alchemy shelf URL still resolves", async () => {
+  const response = await fetch(`${baseUrl}/library/alchemy`, { redirect: "manual" });
+  assert.ok([301, 308].includes(response.status), `/library/alchemy returned ${response.status}`);
+  assert.match(response.headers.get("location") ?? "", /\/library\/alchemies$/);
+});
+
+test("the Alchemies shelf covers more than Europe", async () => {
+  const html = await (await fetch(`${baseUrl}/library/alchemies`)).text();
+  for (const expected of ["Waidan", "Neidan", "Rasa", "Cantong qi", "Baopuzi"]) {
+    assert.match(html, new RegExp(expected), `Alchemies shelf missing ${expected}`);
+  }
 });
 
 test("the server resolved every module it needed", () => {
