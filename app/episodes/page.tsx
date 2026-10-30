@@ -9,6 +9,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Search and listen through the Philosophical Minds Podcast archive.",
   path: "/episodes",
+  image: "/og-episodes.jpg",
 });
 
 export default async function EpisodesPage() {
@@ -16,7 +17,7 @@ export default async function EpisodesPage() {
 
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero" style={{ "--hero-image": "url('/hero-episodes.webp')" } as React.CSSProperties}>
         <SiteHeader />
         <p className="eyebrow">Scholarly media catalog</p>
         <h1>Episode Archive</h1>

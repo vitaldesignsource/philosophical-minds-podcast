@@ -47,7 +47,7 @@ export const metadata: Metadata = pageMetadata({
 export default function AppearancesPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero" style={{ "--hero-image": "url('/hero-appearances.webp')" } as React.CSSProperties}>
         <SiteHeader />
         <p className="eyebrow">Appearances</p>
         <h1>Sky Mathis on Other Shows</h1>

@@ -51,7 +51,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ProjectsPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero" style={{ "--hero-image": "url('/hero-projects.webp')" } as React.CSSProperties}>
         <SiteHeader />
         <p className="eyebrow">Projects and Collaborations</p>
         <h1>Creative Work Beyond the Archive</h1>

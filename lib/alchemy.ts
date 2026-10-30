@@ -9,6 +9,9 @@ export const alchemyShelf: Shelf = {
   summary:
     "Fifteen centuries of work at the furnace: what the alchemists actually did, the language they hid it in, and why the split between laboratory and soul is a modern invention.",
 
+  heroImage: "/shelf-alchemies.webp",
+  heroImageAlt:
+    "Glass and copper vessels ranged along a workbench, an alembic and crucibles lit from one side.",
   facts: [
     { label: "Origin", value: "Greco-Roman Egypt, chiefly Alexandria" },
     { label: "Period", value: "c. 200 CE to the eighteenth century" },

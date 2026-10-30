@@ -266,6 +266,9 @@ export const hermeticismShelf: Shelf = {
   eyebrow: "Thrice-Greatest",
   cardDescription: "Texts, principles, correspondences, and related conversations.",
   summary: hermeticismSummary,
+  heroImage: "/shelf-hermeticism.webp",
+  heroImageAlt:
+    "A slab of polished green stone half-buried in sand, incised with worn geometric channels, Egyptian columns dissolving into haze behind it.",
   facts: hermeticismFacts,
   overview: hermeticismOverview,
   texts: { heading: { eyebrow: "Primary Sources", title: "The Core Texts" }, entries: hermeticTexts },

@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: episode.title,
     description: episode.excerpt,
     path: `/episodes/${episode.slug}`,
-    image: episode.artwork || undefined,
+    image: episode.artwork || "/og-episodes.jpg",
     type: "article",
     publishedTime: episode.publishedAt || undefined,
   });

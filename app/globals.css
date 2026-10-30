@@ -1882,10 +1882,16 @@ section:not(.hero) {
   }
 }
 
+/*
+ * Interior page heroes. Each page sets --hero-image to its own artwork; pages
+ * that do not fall back to the site hero, so adding a page never leaves a
+ * blank band. The gradient stays here rather than being baked into the images,
+ * so headline contrast is tunable without re-exporting artwork.
+ */
 .page-hero {
   background:
     linear-gradient(180deg, rgba(6, 6, 6, 0.6), rgba(6, 6, 6, 0.98)),
-    url("/philosophical-minds-hero.webp") center / cover;
+    var(--hero-image, url("/philosophical-minds-hero.webp")) center / cover;
   padding: 10rem clamp(1rem, 4vw, 4rem) 5rem;
 }
 

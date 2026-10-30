@@ -17,7 +17,7 @@ export default async function TopicsPage() {
 
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero" style={{ "--hero-image": "url('/hero-topics.webp')" } as React.CSSProperties}>
         <SiteHeader />
         <p className="eyebrow">Map of Ideas</p>
         <h1>Topics</h1>

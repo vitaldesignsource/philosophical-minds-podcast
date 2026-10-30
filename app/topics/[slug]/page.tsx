@@ -43,7 +43,10 @@ export default async function TopicSignalsPage({ params }: Props) {
 
   return (
     <main>
-      <section className="page-hero">
+      <section
+        className="page-hero"
+        style={topic.heroImage ? ({ "--hero-image": `url('${topic.heroImage}')` } as React.CSSProperties) : undefined}
+      >
         <SiteHeader />
         <p className="eyebrow">Related Signals</p>
         <h1>{topic.title}</h1>

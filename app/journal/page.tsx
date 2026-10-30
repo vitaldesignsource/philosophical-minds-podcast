@@ -9,12 +9,13 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Essays, episode companions, reading lists, and philosophical studies.",
   path: "/journal",
+  image: "/og-journal.jpg",
 });
 
 export default function JournalPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero" style={{ "--hero-image": "url('/hero-journal.webp')" } as React.CSSProperties}>
         <SiteHeader />
         <p className="eyebrow">Premium editorial archive</p>
         <h1>Journal</h1>

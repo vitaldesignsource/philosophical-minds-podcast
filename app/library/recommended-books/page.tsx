@@ -10,6 +10,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Recommended Books",
   description: `Every book the Library recommends — ${total} titles across the reference shelves, each with a note on why it earns its place.`,
   path: "/library/recommended-books",
+  image: "/og-library.jpg",
 });
 
 export default function RecommendedBooksPage() {

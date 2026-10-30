@@ -233,6 +233,46 @@ test("the Hermeticism topic exists and reaches its shelf", async () => {
   assert.match(html, /href="\/library\/hermeticism"/);
 });
 
+test("each section renders its own hero artwork", async () => {
+  // The homepage hero is a stylesheet rule rather than an inline property, so
+  // it is checked against the CSS below instead of the markup.
+  const expected = {
+    "/episodes": "hero-episodes.webp",
+    "/library": "hero-library.webp",
+    "/journal": "hero-journal.webp",
+    "/about": "hero-about.webp",
+    "/library/hermeticism": "shelf-hermeticism.webp",
+    "/topics/alchemy": "topic-alchemy.webp",
+  };
+  for (const [route, file] of Object.entries(expected)) {
+    const html = await (await fetch(baseUrl + route)).text();
+    assert.match(html, new RegExp(file.replace(".", "\\.")), `${route} does not use ${file}`);
+  }
+
+  const home = await (await fetch(`${baseUrl}/`)).text();
+  const sheet = home.match(/href="(\/_next\/static\/[^"]+\.css)"/)?.[1];
+  assert.ok(sheet, "could not find the stylesheet from the homepage");
+  const css = await (await fetch(baseUrl + sheet)).text();
+  assert.match(css, /philosophical-minds-hero\.webp/, "the site hero is missing from the stylesheet");
+});
+
+test("every hero asset the pages reference is actually served", async () => {
+  const routes = ["/", "/episodes", "/guests", "/topics", "/library", "/journal", "/projects",
+    "/appearances", "/about", "/contact", "/library/hermeticism", "/topics/alchemy"];
+  const referenced = new Set();
+  for (const route of routes) {
+    const html = await (await fetch(baseUrl + route)).text();
+    for (const m of html.matchAll(/\/((?:hero|shelf|topic|og)[a-z0-9-]*|philosophical-minds-hero)\.(webp|jpg)/g)) {
+      referenced.add(`/${m[1]}.${m[2]}`);
+    }
+  }
+  assert.ok(referenced.size >= 12, `expected many hero assets, found ${referenced.size}`);
+  for (const asset of referenced) {
+    const res = await fetch(baseUrl + asset);
+    assert.equal(res.status, 200, `${asset} is referenced but returns ${res.status}`);
+  }
+});
+
 test("the server resolved every module it needed", () => {
   for (const pattern of RESOLUTION_FAILURES) {
     assert.doesNotMatch(output, pattern, `server reported a module resolution failure:\n${output}`);

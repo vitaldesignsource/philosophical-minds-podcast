@@ -9,6 +9,9 @@ export const sacredArchitectureShelf: Shelf = {
   summary:
     "How builders made the cosmos inhabitable: orientation, proportion and number from Neolithic alignments to the Renaissance, and how to tell the documented history from the modern mythology.",
 
+  heroImage: "/shelf-sacred-architecture.webp",
+  heroImageAlt:
+    "A great dome seen from within, ringed with windows, light falling in measured bands to the floor.",
   facts: [
     { label: "Scope", value: "Temples, churches, mosques, stupas and the geometry beneath them" },
     { label: "Period", value: "Neolithic to the present" },

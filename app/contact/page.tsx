@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero" style={{ "--hero-image": "url('/hero-contact.webp')" } as React.CSSProperties}>
         <SiteHeader />
         <p className="eyebrow">Drop Us a Line</p>
         <h1>Contact Philosophical Minds</h1>

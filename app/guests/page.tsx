@@ -9,6 +9,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "A guest encyclopedia for Philosophical Minds contributors.",
   path: "/guests",
+  image: "/og-guests.jpg",
 });
 
 export default function GuestsPage() {
@@ -17,7 +18,7 @@ export default function GuestsPage() {
 
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero" style={{ "--hero-image": "url('/hero-guests.webp')" } as React.CSSProperties}>
         <SiteHeader />
         <p className="eyebrow">The Minds</p>
         <h1>Guest Index</h1>

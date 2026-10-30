@@ -11,57 +11,68 @@ export type CoreTopic = {
    * topic, so these links stay worth following.
    */
   shelves?: string[];
+  /** Hero artwork for the topic page. Falls back to the site hero when absent. */
+  heroImage?: string;
 };
 
 export const coreTopics: CoreTopic[] = [
   {
     title: "Philosophy",
+    heroImage: "/topic-philosophy.webp",
     description: "Wisdom, inquiry, classical thought, ethics, metaphysics, and the act of thinking itself.",
     terms: ["philosophy", "philosophical", "wisdom", "plato", "aristotle", "socrates"],
     shelves: ["neoplatonism"],
   },
   {
     title: "Metaphysics",
+    heroImage: "/topic-metaphysics.webp",
     description: "Being, causality, spirit, form, matter, reality, and the structure beneath appearances.",
     terms: ["metaphysics", "metaphysical", "being", "reality", "form", "matter"],
     shelves: ["neoplatonism", "hermeticism"],
   },
   {
     title: "Hermeticism",
+    heroImage: "/topic-hermeticism.webp",
     description: "Hermes Trismegistus, the Corpus Hermeticum, correspondence, and the Hermetic inheritance.",
     terms: ["hermetic", "hermeticism", "hermes", "trismegistus", "emerald tablet", "thoth", "corpus hermeticum"],
     shelves: ["hermeticism", "alchemy"],
   },
   {
     title: "Alchemy",
+    heroImage: "/topic-alchemy.webp",
     description: "Laboratory, symbolic, and psycho-spiritual traditions of transformation.",
     terms: ["alchemy", "alchemical", "laboratory", "transmutation", "rosicrucian", "elixir", "spagyric", "chymistry"],
     shelves: ["alchemy", "hermeticism"],
   },
   {
     title: "Theurgy and Ritual",
+    heroImage: "/topic-theurgy.webp",
     description: "Iamblichus, ritual intelligence, divine symbols, and Neoplatonic ascent.",
     terms: ["theurgy", "iamblichus", "ritual", "divine symbol", "neoplaton", "magick", "magic", "initiation", "ceremonial", "invocation", "grimoire", "mysteries"],
     shelves: ["neoplatonism", "hermeticism"],
   },
   {
     title: "Consciousness",
+    heroImage: "/topic-consciousness.webp",
     description: "Mind, matter, liminality, perception, and the hard edges of experience.",
     terms: ["consciousness", "mind", "psyche", "perception", "liminality", "dream", "vision", "imagination", "soul"],
   },
   {
     title: "Esoteric Christianity",
+    heroImage: "/topic-esoteric-christianity.webp",
     description: "Mystical theology, symbolic reading, initiation, and sacred history.",
     terms: ["esoteric christianity", "christian", "gnostic", "gnosticism", "rosicrucian", "mystical theology"],
     shelves: ["qabalah-and-kabbalah", "hermeticism"],
   },
   {
     title: "Hidden History",
+    heroImage: "/topic-hidden-history.webp",
     description: "The archives, forgotten lineages, and contested narratives behind culture.",
     terms: ["hidden history", "history", "lineage", "archive", "civilization"],
   },
   {
     title: "Religion and Mysticism",
+    heroImage: "/topic-religion-mysticism.webp",
     // Deliberately excludes "esoteric" and "tradition": almost every guest
     // summary contains them, so they matched half the archive and identified
     // nothing.
@@ -71,12 +82,14 @@ export const coreTopics: CoreTopic[] = [
   },
   {
     title: "Science and the Ether",
+    heroImage: "/topic-science-ether.webp",
     description: "Natural philosophy, cosmology, subtle bodies, and matter in motion.",
     terms: ["ether", "science", "cosmology", "matter", "natural philosophy"],
     shelves: ["alchemy"],
   },
   {
     title: "Symbolism and Sacred Architecture",
+    heroImage: "/topic-symbolism.webp",
     description: "Symbols, temple geometry, proportion, ritual space, and the architecture of meaning.",
     terms: ["symbol", "symbolism", "sacred architecture", "architecture", "temple", "geometry", "myth", "mythology", "serpent", "emblem"],
     shelves: ["sacred-architecture", "hermeticism"],

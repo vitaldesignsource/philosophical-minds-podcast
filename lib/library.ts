@@ -64,6 +64,10 @@ export type Shelf = {
   cardDescription: string;
   /** One sentence under the shelf title, and the page's meta description. */
   summary: string;
+  /** Hero artwork for the shelf page. Falls back to the site hero when absent. */
+  heroImage?: string;
+  /** Describes the artwork. Only used where the image is content, not decoration. */
+  heroImageAlt?: string;
   facts: ShelfFact[];
   overview: string[];
   texts: { heading: ShelfHeading; entries: ShelfText[] };

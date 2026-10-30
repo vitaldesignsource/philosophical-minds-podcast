@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: shelf.title,
     description: shelf.summary,
     path: `/library/${shelf.slug}`,
+    image: "/og-shelf.jpg",
     type: "article",
   });
 }
@@ -50,7 +51,10 @@ export default async function ShelfPage({ params }: Props) {
   return (
     <main>
       <JsonLd data={schema} />
-      <section className="page-hero shelf-hero">
+      <section
+        className="page-hero shelf-hero"
+        style={shelf.heroImage ? ({ "--hero-image": `url('${shelf.heroImage}')` } as React.CSSProperties) : undefined}
+      >
         <SiteHeader />
         <p className="eyebrow">{shelf.eyebrow}</p>
         <h1>{shelf.title}</h1>

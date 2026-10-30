@@ -9,12 +9,13 @@ export const metadata: Metadata = pageMetadata({
   description:
     "A philosophical library for thinkers, traditions, symbols, books, and systems.",
   path: "/library",
+  image: "/og-library.jpg",
 });
 
 export default function LibraryPage() {
   return (
     <main>
-      <section className="page-hero">
+      <section className="page-hero" style={{ "--hero-image": "url('/hero-library.webp')" } as React.CSSProperties}>
         <SiteHeader />
         <p className="eyebrow">Enter the Library</p>
         <h1>The Library</h1>

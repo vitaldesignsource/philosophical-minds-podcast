@@ -9,6 +9,9 @@ export const kabbalahShelf: Shelf = {
   summary:
     "The Jewish mystical tradition of the sefirot and the Ein Sof, the Christian and occult systems that later borrowed its vocabulary, and why the three are not interchangeable.",
 
+  heroImage: "/shelf-kabbalah.webp",
+  heroImageAlt:
+    "Ten points of flame suspended in a dim hall, arranged in the pattern of the sefirot.",
   facts: [
     { label: "Origin", value: "Provence and Catalonia, with far older antecedents" },
     { label: "Period", value: "12th century to the present" },

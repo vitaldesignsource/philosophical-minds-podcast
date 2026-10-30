@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <main className="about-page">
-      <section className="page-hero">
+      <section className="page-hero" style={{ "--hero-image": "url('/hero-about.webp')" } as React.CSSProperties}>
         <SiteHeader />
         <p className="eyebrow">The Love of Wisdom</p>
         <h1>About Philosophical Minds</h1>

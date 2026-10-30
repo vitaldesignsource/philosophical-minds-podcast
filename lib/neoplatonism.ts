@@ -9,6 +9,9 @@ export const neoplatonismShelf: Shelf = {
   summary:
     "The last great school of ancient philosophy: its account of reality as procession from a single source, its discipline of return, and its long afterlife in three religions.",
 
+  heroImage: "/shelf-neoplatonism.webp",
+  heroImageAlt:
+    "A colonnade receding into a vaulted tunnel of light, each arch brighter than the last.",
   facts: [
     { label: "Origin", value: "Rome and Alexandria, later Athens and Syria" },
     { label: "Period", value: "3rd–6th centuries CE" },
