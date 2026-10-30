@@ -20,6 +20,7 @@ const ROUTES = [
   "/library/alchemy",
   "/library/qabalah-and-kabbalah",
   "/library/sacred-architecture",
+  "/library/gnosticism",
   "/library/recommended-books",
   "/episodes",
   "/guests",

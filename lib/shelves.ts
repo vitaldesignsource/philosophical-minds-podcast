@@ -1,4 +1,5 @@
 import { alchemyShelf } from "./alchemy";
+import { gnosticismShelf } from "./gnosticism";
 import { hermeticismShelf } from "./hermeticism";
 import { kabbalahShelf } from "./kabbalah";
 import { neoplatonismShelf } from "./neoplatonism";
@@ -12,6 +13,7 @@ export const shelves: Shelf[] = [
   alchemyShelf,
   kabbalahShelf,
   sacredArchitectureShelf,
+  gnosticismShelf,
 ];
 
 /** Shelves the Library announces but has not written yet. */

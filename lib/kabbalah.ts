@@ -273,6 +273,7 @@ export const kabbalahShelf: Shelf = {
   related: [
     { href: "/library/hermeticism", label: "Hermeticism", kind: "Shelf" },
     { href: "/library/neoplatonism", label: "Neoplatonism", kind: "Shelf" },
+  { href: "/library/gnosticism", label: "Gnosticism", kind: "Shelf" },
     { href: "/topics/religion-and-mysticism", label: "Religion and Mysticism", kind: "Topic" },
     { href: "/topics/esoteric-christianity", label: "Esoteric Christianity", kind: "Topic" },
     { href: "/topics/metaphysics", label: "Metaphysics", kind: "Topic" },
