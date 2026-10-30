@@ -91,6 +91,32 @@ export default async function ShelfPage({ params }: Props) {
               ))}
             </div>
 
+            {shelf.traditions && (
+              <div className="shelf-block">
+                <div className="shelf-block__heading">
+                  <p className="eyebrow">{shelf.traditions.heading.eyebrow}</p>
+                  <h2>{shelf.traditions.heading.title}</h2>
+                </div>
+                <div className="shelf-traditions">
+                  {shelf.traditions.entries.map((tradition) => (
+                    <article className="shelf-tradition" key={tradition.name}>
+                      <div className="shelf-tradition__head">
+                        <p className="eyebrow">{tradition.region}</p>
+                        <p className="shelf-tradition__span">{tradition.span}</p>
+                      </div>
+                      <h3>{tradition.name}</h3>
+                      <p>{tradition.description}</p>
+                      <ul className="shelf-tradition__markers">
+                        {tradition.markers.map((marker) => (
+                          <li key={marker}>{marker}</li>
+                        ))}
+                      </ul>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="shelf-block">
               <div className="shelf-block__heading">
                 <p className="eyebrow">{shelf.texts.heading.eyebrow}</p>
@@ -128,6 +154,27 @@ export default async function ShelfPage({ params }: Props) {
                 ))}
               </div>
             </div>
+
+            {shelf.figures && (
+              <div className="shelf-block">
+                <div className="shelf-block__heading">
+                  <p className="eyebrow">{shelf.figures.heading.eyebrow}</p>
+                  <h2>{shelf.figures.heading.title}</h2>
+                </div>
+                <div className="shelf-figures">
+                  {shelf.figures.entries.map((figure) => (
+                    <article className="shelf-figure" key={figure.name}>
+                      <div className="shelf-figure__head">
+                        <h3>{figure.name}</h3>
+                        <p className="shelf-figure__dates">{figure.dates}</p>
+                      </div>
+                      <p className="shelf-figure__school">{figure.school}</p>
+                      <p>{figure.description}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="shelf-block">
               <div className="shelf-block__heading">

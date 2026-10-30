@@ -17,9 +17,10 @@ const ROUTES = [
   "/library",
   "/library/hermeticism",
   "/library/neoplatonism",
-  "/library/alchemy",
+  "/library/alchemies",
   "/library/qabalah-and-kabbalah",
   "/library/sacred-architecture",
+  "/library/philosophies",
   "/library/recommended-books",
   "/episodes",
   "/guests",
@@ -136,6 +137,12 @@ test("shelves cross-link to one another", async () => {
   assert.match(neoplatonism, /Plotinus/);
 });
 
+test("the retired alchemy slug still reaches the Alchemies shelf", async () => {
+  const response = await fetch(`${baseUrl}/library/alchemy`, { redirect: "manual" });
+  assert.ok([301, 308].includes(response.status), `/library/alchemy returned ${response.status}`);
+  assert.equal(response.headers.get("location"), "/library/alchemies");
+});
+
 test("an unknown shelf returns 404 rather than erroring", async () => {
   const response = await fetch(`${baseUrl}/library/not-a-real-shelf`);
   assert.equal(response.status, 404);
@@ -205,7 +212,7 @@ test("the document head offers feed autodiscovery", async () => {
 
 test("topic pages lead into the Library", async () => {
   const html = await (await fetch(`${baseUrl}/topics/alchemy`)).text();
-  assert.match(html, /href="\/library\/alchemy"/, "alchemy topic does not link to its shelf");
+  assert.match(html, /href="\/library\/alchemies"/, "alchemy topic does not link to its shelf");
   assert.match(html, /href="\/library\/hermeticism"/, "alchemy topic does not link to Hermeticism");
 });
 

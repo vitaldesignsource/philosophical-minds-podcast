@@ -1,7 +1,8 @@
-import { alchemyShelf } from "./alchemy";
+import { alchemiesShelf } from "./alchemies";
 import { hermeticismShelf } from "./hermeticism";
 import { kabbalahShelf } from "./kabbalah";
 import { neoplatonismShelf } from "./neoplatonism";
+import { philosophiesShelf } from "./philosophies";
 import { sacredArchitectureShelf } from "./sacredArchitecture";
 import type { PlannedShelf, Shelf } from "./library";
 
@@ -9,9 +10,10 @@ import type { PlannedShelf, Shelf } from "./library";
 export const shelves: Shelf[] = [
   hermeticismShelf,
   neoplatonismShelf,
-  alchemyShelf,
+  alchemiesShelf,
   kabbalahShelf,
   sacredArchitectureShelf,
+  philosophiesShelf,
 ];
 
 /** Shelves the Library announces but has not written yet. */

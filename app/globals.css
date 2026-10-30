@@ -3436,9 +3436,140 @@ select option {
   }
 }
 
+
+/* --- Traditions: one card per regional branch of a shared tradition --- */
+.shelf-traditions {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.shelf-tradition {
+  border: 1px solid rgba(210, 170, 111, 0.2);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+    rgba(7, 7, 7, 0.64);
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem;
+}
+
+.shelf-tradition__head {
+  align-items: baseline;
+  border-bottom: 1px solid rgba(210, 170, 111, 0.18);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding-bottom: 0.6rem;
+}
+
+.shelf-tradition__head .eyebrow {
+  margin: 0;
+}
+
+.shelf-tradition__span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.shelf-tradition h3 {
+  color: var(--ivory);
+  font-family: var(--font-cinzel), Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  margin: 0.8rem 0 0.6rem;
+}
+
+.shelf-tradition > p {
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.shelf-tradition__markers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 1.1rem 0 0;
+  padding: 0;
+}
+
+.shelf-tradition__markers li {
+  border: 1px solid rgba(210, 170, 111, 0.28);
+  color: var(--gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  padding: 0.28rem 0.6rem;
+  text-transform: uppercase;
+}
+
+/* --- Figures: named thinkers on shelves carried by people --- */
+.shelf-figures {
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.shelf-figure {
+  border-top: 1px solid rgba(210, 170, 111, 0.16);
+  padding: 1.3rem 0;
+}
+
+.shelf-figure:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.shelf-figure__head {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: space-between;
+}
+
+.shelf-figure__head h3 {
+  color: var(--ivory);
+  font-family: var(--font-cinzel), Georgia, serif;
+  font-size: 1.18rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.shelf-figure__dates {
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.shelf-figure__school {
+  color: var(--gold);
+  font-family: var(--font-cinzel), Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  margin: 0.45rem 0 0.6rem;
+  text-transform: uppercase;
+}
+
+.shelf-figure > p:last-child {
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
 @media (max-width: 900px) {
   .shelf-texts,
-  .shelf-principles {
+  .shelf-principles,
+  .shelf-traditions {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -3479,6 +3610,12 @@ select option {
   .shelf-glossary__item {
     gap: 0.5rem;
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .shelf-tradition__head,
+  .shelf-figure__head {
+    flex-direction: column;
+    gap: 0.3rem;
   }
 
   .shelf-prose__lead::first-letter {

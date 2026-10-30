@@ -30,13 +30,13 @@ export const coreTopics: CoreTopic[] = [
     title: "Hermeticism",
     description: "Hermes Trismegistus, the Corpus Hermeticum, correspondence, and the Hermetic inheritance.",
     terms: ["hermetic", "hermeticism", "hermes", "trismegistus", "emerald tablet", "thoth", "corpus hermeticum"],
-    shelves: ["hermeticism", "alchemy"],
+    shelves: ["hermeticism", "alchemies"],
   },
   {
     title: "Alchemy",
     description: "Laboratory, symbolic, and psycho-spiritual traditions of transformation.",
     terms: ["alchemy", "alchemical", "laboratory", "transmutation", "rosicrucian", "elixir", "spagyric", "chymistry"],
-    shelves: ["alchemy", "hermeticism"],
+    shelves: ["alchemies", "hermeticism"],
   },
   {
     title: "Theurgy and Ritual",
@@ -73,7 +73,7 @@ export const coreTopics: CoreTopic[] = [
     title: "Science and the Ether",
     description: "Natural philosophy, cosmology, subtle bodies, and matter in motion.",
     terms: ["ether", "science", "cosmology", "matter", "natural philosophy"],
-    shelves: ["alchemy"],
+    shelves: ["alchemies"],
   },
   {
     title: "Symbolism and Sacred Architecture",

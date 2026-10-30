@@ -249,7 +249,7 @@ export const hermeticGlossary: ShelfGlossaryEntry[] = [
 
 export const hermeticRelated: ShelfLink[] = [
   { href: "/library/neoplatonism", label: "Neoplatonism", kind: "Shelf" },
-  { href: "/library/alchemy", label: "Alchemy", kind: "Shelf" },
+  { href: "/library/alchemies", label: "Alchemies", kind: "Shelf" },
   { href: "/library/qabalah-and-kabbalah", label: "Qabalah and Kabbalah", kind: "Shelf" },
   { href: "/topics/alchemy", label: "Alchemy", kind: "Topic" },
   { href: "/topics/theurgy-and-ritual", label: "Theurgy and Ritual", kind: "Topic" },
